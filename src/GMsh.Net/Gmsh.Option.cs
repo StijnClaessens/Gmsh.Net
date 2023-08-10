@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System.Drawing;
 using System.Reflection;
 using UnsafeEx;
@@ -19,7 +19,7 @@ namespace GmshNet
             /// </summary>
             public static void SetNumber(string name, double value)
             {
-                Gmsh_Warp.GmshOptionSetNumber(name, value, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOptionSetNumber(name, value, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -31,7 +31,7 @@ namespace GmshNet
             public static double GetNumber(string name)
             {
                 var value = 0.0;
-                Gmsh_Warp.GmshOptionGetNumber(name, ref value, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOptionGetNumber(name, ref value, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 return value;
             }
@@ -43,7 +43,7 @@ namespace GmshNet
             /// </summary>
             public static void SetString(string name, string value)
             {
-                Gmsh_Warp.GmshOptionSetString(name, value, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOptionSetString(name, value, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -57,7 +57,7 @@ namespace GmshNet
                 unsafe
                 {
                     byte* valueptr;
-                    Gmsh_Warp.GmshOptionGetString(name, &valueptr, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOptionGetString(name, &valueptr, ref Gmsh._staticreff);
                     var value = UnsafeHelp.ToString(valueptr);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
@@ -73,7 +73,7 @@ namespace GmshNet
             /// </summary>
             public static void SetColor(string name, int r, int g, int b, int a = 255)
             {
-                Gmsh_Warp.GmshOptionSetColor(name, r, g, b, a, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOptionSetColor(name, r, g, b, a, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -91,7 +91,7 @@ namespace GmshNet
             public static void GetColor(string name, out int r, out int g, out int b, out int a)
             {
                 r = 0; g = 0; b = 0; a = 0;
-                Gmsh_Warp.GmshOptionGetColor(name, ref r, ref g, ref b, ref a, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOptionGetColor(name, ref r, ref g, ref b, ref a, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 

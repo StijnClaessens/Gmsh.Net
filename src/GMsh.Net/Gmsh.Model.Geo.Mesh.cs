@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 
@@ -22,7 +22,7 @@ namespace GmshNet
                     public static void SetSize(ValueTuple<int, int>[] dimTags, double size)
                     {
                         var list = dimTags.ToIntArray();
-                        Gmsh_Warp.GmshModelGeoMeshSetSize(list, list.LongLength, size, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetSize(list, list.LongLength, size, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -34,7 +34,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetTransfiniteCurve(int tag, int nPoints, string meshType = "Progression", double coef = 1)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetTransfiniteCurve(tag, nPoints, meshType, coef, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetTransfiniteCurve(tag, nPoints, meshType, coef, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -50,7 +50,7 @@ namespace GmshNet
                     public static void SetTransfiniteSurface(int tag, string arrangement = "Left", int[] cornerTags = default)
                     {
                         if (cornerTags == default) cornerTags = new int[0];
-                        Gmsh_Warp.GmshModelGeoMeshSetTransfiniteSurface(tag, arrangement, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetTransfiniteSurface(tag, arrangement, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -62,7 +62,7 @@ namespace GmshNet
                     public static void SetTransfiniteVolume(int tag, int[] cornerTags = default)
                     {
                         if (cornerTags == default) cornerTags = new int[0];
-                        Gmsh_Warp.GmshModelGeoMeshSetTransfiniteVolume(tag, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetTransfiniteVolume(tag, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -73,7 +73,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetRecombine(int dim, int tag, double angle = 45)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetRecombine(dim, tag, angle, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetRecombine(dim, tag, angle, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -83,7 +83,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetSmoothing(int dim, int tag, int val)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetSmoothing(dim, tag, val, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetSmoothing(dim, tag, val, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -96,7 +96,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetReverse(int dim, int tag, bool val = true)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetReverse(dim, tag, Convert.ToInt32(val), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetReverse(dim, tag, Convert.ToInt32(val), ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -106,7 +106,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetAlgorithm(int dim, int tag, int val)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetAlgorithm(dim, tag, val, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetAlgorithm(dim, tag, val, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -117,7 +117,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetSizeFromBoundary(int dim, int tag, int val)
                     {
-                        Gmsh_Warp.GmshModelGeoMeshSetSizeFromBoundary(dim, tag, val, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoMeshSetSizeFromBoundary(dim, tag, val, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
                 }

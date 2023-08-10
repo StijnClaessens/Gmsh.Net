@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System.Reflection;
 
 namespace GmshNet
@@ -15,7 +15,7 @@ namespace GmshNet
             /// </summary>
             public static void SetNumber(string name, string option, double value)
             {
-                Gmsh_Warp.GmshPluginSetNumber(name, option, value, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshPluginSetNumber(name, option, value, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -24,7 +24,7 @@ namespace GmshNet
             /// </summary>
             public static void SetString(string name, string option, string value)
             {
-                Gmsh_Warp.GmshPluginSetString(name, option, value, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshPluginSetString(name, option, value, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -33,7 +33,7 @@ namespace GmshNet
             /// </summary>
             public static void Run(string name)
             {
-                Gmsh_Warp.GmshPluginRun(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshPluginRun(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
         }

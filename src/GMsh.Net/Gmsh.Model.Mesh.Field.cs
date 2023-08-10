@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System.Reflection;
 using UnsafeEx;
 
@@ -22,7 +22,7 @@ namespace GmshNet
                     /// </summary>
                     public static int Add(string fieldType, int tag = -1)
                     {
-                        var index = Gmsh_Warp.GmshModelMeshFieldAdd(fieldType, tag, ref Gmsh._staticreff);
+                        var index = Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldAdd(fieldType, tag, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return index;
                     }
@@ -32,7 +32,7 @@ namespace GmshNet
                     /// </summary>
                     public static void Remove(int tag)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldRemove(tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldRemove(tag, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -41,7 +41,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetNumber(int tag, string option, double value)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldSetNumber(tag, option, value, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldSetNumber(tag, option, value, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -50,7 +50,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetString(int tag, string option, string value)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldSetString(tag, option, value, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldSetString(tag, option, value, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -59,7 +59,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetNumbers(int tag, string option, double[] value)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldSetNumbers(tag, option, value, value.LongLength, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldSetNumbers(tag, option, value, value.LongLength, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -68,7 +68,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetAsBackgroundMesh(int tag)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldSetAsBackgroundMesh(tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldSetAsBackgroundMesh(tag, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -77,7 +77,7 @@ namespace GmshNet
                     /// </summary>
                     public static void SetAsBoundaryLayer(int tag)
                     {
-                        Gmsh_Warp.GmshModelMeshFieldSetAsBoundaryLayer(tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldSetAsBoundaryLayer(tag, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 
@@ -90,7 +90,7 @@ namespace GmshNet
 						{
                             int* tags_ptr;
                             int tags_n = 0;
-                            Gmsh_Warp.GmshModelMeshFieldList(&tags_ptr, ref tags_n, ref Gmsh._staticreff);
+                            Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldList(&tags_ptr, ref tags_n, ref Gmsh._staticreff);
                             var tags = UnsafeHelp.ToIntArray(tags_ptr, tags_n);
                             Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                             return tags;
@@ -103,7 +103,7 @@ namespace GmshNet
                     public static string GetType(int tag)
 					{
                         string fileType = string.Empty;
-                        Gmsh_Warp.GmshModelMeshFieldGetType(tag, ref fileType, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldGetType(tag, ref fileType, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return fileType;
                     }
@@ -114,7 +114,7 @@ namespace GmshNet
                     public static double GetNumber(int tag, string option)
 					{
                         double number = -1;
-                        Gmsh_Warp.GmshModelMeshFieldGetNumber(tag, option, ref number, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldGetNumber(tag, option, ref number, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return number;
                     }
@@ -128,7 +128,7 @@ namespace GmshNet
                         {
                             double* number_ptr;
                             int number_n = 0;
-                            Gmsh_Warp.GmshModelMeshFieldGetNumbers(tag, option, &number_ptr, ref number_n, ref Gmsh._staticreff);
+                            Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldGetNumbers(tag, option, &number_ptr, ref number_n, ref Gmsh._staticreff);
                             Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                             var number = UnsafeHelp.ToDoubleArray(number_ptr, number_n);
                             return number;
@@ -138,7 +138,7 @@ namespace GmshNet
                     public static string GetString(int tag, string option)
 					{
                         string value = string.Empty;
-                        Gmsh_Warp.GmshModelMeshFieldGetString(tag, option, ref value, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshFieldGetString(tag, option, ref value, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return value;
                     }

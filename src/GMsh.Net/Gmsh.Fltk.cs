@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 using UnsafeEx;
@@ -18,7 +18,7 @@ namespace GmshNet
             /// </summary>
             public static void Initialize()
             {
-                Gmsh_Warp.GmshFltkInitialize(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkInitialize(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -29,7 +29,7 @@ namespace GmshNet
             /// </summary>
             public static void Wait(double time = -1)
             {
-                Gmsh_Warp.GmshFltkWait(time, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkWait(time, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -41,7 +41,7 @@ namespace GmshNet
             /// </summary>
             public static void Update()
             {
-                Gmsh_Warp.GmshFltkUpdate(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkUpdate(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -52,7 +52,7 @@ namespace GmshNet
             /// </summary>
             public static void Awake(string action = "")
             {
-                Gmsh_Warp.GmshFltkAwake(action, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkAwake(action, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -61,7 +61,7 @@ namespace GmshNet
             /// </summary>
             public static void Lock()
             {
-                Gmsh_Warp.GmshFltkLock(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkLock(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -70,7 +70,7 @@ namespace GmshNet
             /// </summary>
             public static void Unlock()
             {
-                Gmsh_Warp.GmshFltkUnlock(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkUnlock(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -81,7 +81,7 @@ namespace GmshNet
             /// </summary>
             public static void Run()
             {
-                Gmsh_Warp.GmshFltkRun(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkRun(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -91,7 +91,7 @@ namespace GmshNet
             /// </summary>
             public static int IsAvailable()
             {
-                var index = Gmsh_Warp.GmshFltkIsAvailable(ref Gmsh._staticreff);
+                var index = Gmsh_wrap.Gmsh_wrap.GmshFltkIsAvailable(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 return index;
             }
@@ -106,7 +106,7 @@ namespace GmshNet
                 {
                     int* dimTags_ptr;
                     long dimTags_n = 0;
-                    var index = Gmsh_Warp.GmshFltkSelectEntities(&dimTags_ptr, ref dimTags_n, dim, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshFltkSelectEntities(&dimTags_ptr, ref dimTags_n, dim, ref Gmsh._staticreff);
                     dimTags = UnsafeHelp.ToIntArray(dimTags_ptr, dimTags_n).ToIntPair();
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
@@ -122,7 +122,7 @@ namespace GmshNet
                 {
                     long* elementTags_ptr;
                     long elementTags_n = 0;
-                    var index = Gmsh_Warp.GmshFltkSelectElements(&elementTags_ptr, ref elementTags_n, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshFltkSelectElements(&elementTags_ptr, ref elementTags_n, ref Gmsh._staticreff);
                     elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
@@ -138,7 +138,7 @@ namespace GmshNet
                 {
                     int* viewTags_ptr;
                     long viewTags_n = 0;
-                    var index = Gmsh_Warp.GmshFltkSelectViews(&viewTags_ptr, ref viewTags_n, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshFltkSelectViews(&viewTags_ptr, ref viewTags_n, ref Gmsh._staticreff);
                     viewTags = UnsafeHelp.ToIntArray(viewTags_ptr, viewTags_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
@@ -150,7 +150,7 @@ namespace GmshNet
             /// </summary>
             public static void SetStatusMessage(string message, bool graphics = false)
             {
-                Gmsh_Warp.GmshFltkSetStatusMessage(message, Convert.ToInt32(graphics), ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkSetStatusMessage(message, Convert.ToInt32(graphics), ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -159,7 +159,7 @@ namespace GmshNet
             /// </summary>
             public static void ShowContextWindow(int dim, int tag)
 			{
-                Gmsh_Warp.GmshFltkShowContextWindow(dim, tag, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkShowContextWindow(dim, tag, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -168,7 +168,7 @@ namespace GmshNet
             /// </summary>
             public static void OpenTreeItem(string name)
             {
-                Gmsh_Warp.GmshFltkOpenTreeItem(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkOpenTreeItem(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -177,7 +177,7 @@ namespace GmshNet
             /// </summary>
             public static void CloseTreeItem(string name)
             {
-                Gmsh_Warp.GmshFltkCloseTreeItem(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshFltkCloseTreeItem(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
         }

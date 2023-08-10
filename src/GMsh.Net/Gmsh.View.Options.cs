@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Copy(int refTag, int tag)
                 {
-                    Gmsh_Warp.GmshViewOptionsCopy(refTag, tag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewOptionsCopy(refTag, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -30,7 +30,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetNumber(int tag, string name, double value)
 				{
-                    Gmsh_Warp.GmshViewOptionsSetNumber(tag, name, value, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewOptionsSetNumber(tag, name, value, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -40,7 +40,7 @@ namespace GmshNet
                 public static double GetNumber(int tag, string name)
                 {
                     double value = -1;
-                    Gmsh_Warp.GmshViewOptionsGetNumber(tag, name, ref value, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewOptionsGetNumber(tag, name, ref value, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
                 }
@@ -50,14 +50,14 @@ namespace GmshNet
                 /// </summary>
                 public static void SetString(int tag, string name, double value)
                 {
-                    Gmsh_Warp.GmshViewOptionsSetString(tag, name, value, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewOptionsSetString(tag, name, value, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
                 public static string GetString(int tag, string name)
                 {
                     string value = string.Empty;
-                    Gmsh_Warp.GmshViewOptionsGetString(tag, name, ref value, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewOptionsGetString(tag, name, ref value, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
                 }
@@ -69,7 +69,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetColor(string name, int r, int g, int b, int a = 255)
                 {
-                    Gmsh_Warp.GmshOptionSetColor(name, r, g, b, a, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOptionSetColor(name, r, g, b, a, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -80,7 +80,7 @@ namespace GmshNet
                 public static void GetColor(string name, out int r, out int g, out int b, out int a)
                 {
                     r = 0; g = 0; b = 0; a = 0;
-                    Gmsh_Warp.GmshOptionGetColor(name, ref r, ref g, ref b, ref a, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOptionGetColor(name, ref r, ref g, ref b, ref a, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }            

@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System.Reflection;
 
 namespace GmshNet
@@ -15,7 +15,7 @@ namespace GmshNet
             /// </summary>
             public static void Draw()
             {
-                Gmsh_Warp.GmshGraphicsDraw(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshGraphicsDraw(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
         }

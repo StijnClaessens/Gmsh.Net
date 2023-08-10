@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -18,7 +18,7 @@ namespace GmshNet
             /// </summary>
             public static void Set(string data, string format = "json")
             {
-                Gmsh_Warp.GmshOnelabSet(data, format, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOnelabSet(data, format, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -30,7 +30,7 @@ namespace GmshNet
                 unsafe
                 {
                     byte* data_ptr;
-                    Gmsh_Warp.GmshOnelabGet(&data_ptr, name, format, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOnelabGet(&data_ptr, name, format, ref Gmsh._staticreff);
                     var data = UnsafeHelp.ToString(data_ptr);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return data;
@@ -44,7 +44,7 @@ namespace GmshNet
             /// </summary>
             public static void SetNumber(string name, double[] value)
             {
-                Gmsh_Warp.GmshOnelabSetNumber(name, value, value.LongLength, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOnelabSetNumber(name, value, value.LongLength, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -58,7 +58,7 @@ namespace GmshNet
                 {
                     double* value_ptr;
                     long value_n = 0;
-                    Gmsh_Warp.GmshOnelabGetNumber(name, &value_ptr, ref value_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOnelabGetNumber(name, &value_ptr, ref value_n, ref Gmsh._staticreff);
                     var value = UnsafeHelp.ToDoubleArray(value_ptr, value_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
@@ -76,7 +76,7 @@ namespace GmshNet
                 {
                     long value_n = 0;
                     var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(value, 0);
-                    Gmsh_Warp.GmshOnelabSetString(name, (byte**)ptr.ToPointer(), value_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOnelabSetString(name, (byte**)ptr.ToPointer(), value_n, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }
@@ -91,7 +91,7 @@ namespace GmshNet
                 {
                     byte** valueptr;
                     long value_n = 0;
-                    Gmsh_Warp.GmshOnelabGetString(name, &valueptr, ref value_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOnelabGetString(name, &valueptr, ref value_n, ref Gmsh._staticreff);
                     var value = UnsafeHelp.ToString(valueptr, value_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
@@ -103,7 +103,7 @@ namespace GmshNet
             /// </summary>
             public static void Clear(string name)
             {
-                Gmsh_Warp.GmshOnelabClear(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOnelabClear(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -114,7 +114,7 @@ namespace GmshNet
             /// </summary>
             public static void Run(string name, string command = "")
             {
-                Gmsh_Warp.GmshOnelabRun(name, command, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOnelabRun(name, command, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -127,7 +127,7 @@ namespace GmshNet
                 {
                     byte** valueptr;
                     long value_n = 0;
-                    Gmsh_Warp.GmshOnelabGetNames(search, &valueptr, ref value_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshOnelabGetNames(search, &valueptr, ref value_n, ref Gmsh._staticreff);
                     var names = UnsafeHelp.ToString(valueptr, value_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return names;
@@ -141,7 +141,7 @@ namespace GmshNet
             {
                 unsafe
                 {                    
-                    int value = Gmsh_Warp.GmshOnelabGetChanged(name, ref Gmsh._staticreff);
+                    int value = Gmsh_wrap.Gmsh_wrap.GmshOnelabGetChanged(name, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return Convert.ToBoolean(value);
                 }
@@ -153,7 +153,7 @@ namespace GmshNet
             /// </summary>
             public static void SetChanged(string name, bool value)
 			{
-                Gmsh_Warp.GmshOnelabSetChanged(name, Convert.ToInt32(value), ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshOnelabSetChanged(name, Convert.ToInt32(value), ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
         }

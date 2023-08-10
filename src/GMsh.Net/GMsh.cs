@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -9,7 +9,7 @@ namespace GmshNet
     {
         static Gmsh()
         {
-            UnsafeEx.UnsafeHelp.Free += Gmsh_Warp.GmshFree;
+            UnsafeEx.UnsafeHelp.Free += Gmsh_wrap.Gmsh_wrap.GmshFree;
         }
 
         internal static int _staticreff = 0;
@@ -29,12 +29,12 @@ namespace GmshNet
             {
                 if (argv == null)
                 {
-                    Gmsh_Warp.GmshInitialize(argc, null, Convert.ToInt32(readConfigFiles), Convert.ToInt32(run), ref _staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshInitialize(argc, null, Convert.ToInt32(readConfigFiles), Convert.ToInt32(run), ref _staticreff);
                 }
                 else
                 {
                     var array = Marshal.UnsafeAddrOfPinnedArrayElement(argv, 0);
-                    Gmsh_Warp.GmshInitialize(argc, (byte**)array.ToPointer(), Convert.ToInt32(readConfigFiles), Convert.ToInt32(run), ref _staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshInitialize(argc, (byte**)array.ToPointer(), Convert.ToInt32(readConfigFiles), Convert.ToInt32(run), ref _staticreff);
                 }
                 CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
@@ -48,7 +48,7 @@ namespace GmshNet
         public static void Finalize()
 #pragma warning restore CS0465 // 引入 "Finalize" 方法可能会妨碍析构函数调用
         {
-            Gmsh_Warp.GmshFinalize(ref _staticreff);
+            Gmsh_wrap.Gmsh_wrap.GmshFinalize(ref _staticreff);
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
         }
 
@@ -59,7 +59,7 @@ namespace GmshNet
         /// </summary>
         public static void Open(string fileName)
         {
-            Gmsh_Warp.GmshOpen(fileName, ref _staticreff);
+            Gmsh_wrap.Gmsh_wrap.GmshOpen(fileName, ref _staticreff);
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
         }
 
@@ -70,7 +70,7 @@ namespace GmshNet
         /// </summary>
         public static void Merge(string fileName)
         {
-            Gmsh_Warp.GmshMerge(fileName, ref _staticreff);
+            Gmsh_wrap.Gmsh_wrap.GmshMerge(fileName, ref _staticreff);
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
         }
 
@@ -79,7 +79,7 @@ namespace GmshNet
         /// </summary>
         public static void Write(string fileName)
         {
-            Gmsh_Warp.GmshWrite(fileName, ref _staticreff);
+            Gmsh_wrap.Gmsh_wrap.GmshWrite(fileName, ref _staticreff);
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
         }
 
@@ -88,7 +88,7 @@ namespace GmshNet
         /// </summary>
         public static void Clear()
         {
-            Gmsh_Warp.GmshClear(ref _staticreff);
+            Gmsh_wrap.Gmsh_wrap.GmshClear(ref _staticreff);
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
         }
 
@@ -103,7 +103,7 @@ namespace GmshNet
                     byte* errorptr;
                     int ieff = 0;
 
-                    Gmsh_Warp.GmshLoggerGetLastError(&errorptr, ref ieff);
+                    Gmsh_wrap.Gmsh_wrap.GmshLoggerGetLastError(&errorptr, ref ieff);
                     if (ieff != 0)
                     {
                         throw new GmshException("Could not get last error", where, _staticreff);
@@ -112,7 +112,7 @@ namespace GmshNet
                     {
                         var ptr = new IntPtr(errorptr);
                         var error = Marshal.PtrToStringAnsi(ptr);
-                        Gmsh_Warp.GmshFree(ptr);
+                        Gmsh_wrap.Gmsh_wrap.GmshFree(ptr);
                         throw new GmshException(error, where, _staticreff);
                     }
                 }
@@ -124,7 +124,7 @@ namespace GmshNet
         /// </summary>
         public static bool IsInitialized()
 		{
-            var value = Convert.ToBoolean(Gmsh_Warp.GmshIsInizialized(ref _staticreff));
+            var value = Convert.ToBoolean(Gmsh_wrap.Gmsh_wrap.GmshIsInizialized(ref _staticreff));
             CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             return value;
         }

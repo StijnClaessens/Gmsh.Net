@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -22,13 +22,13 @@ namespace GmshNet
             /// </summary>
             public static void Write(string message, string level = "info")
             {
-                Gmsh_Warp.GmshLoggerWrite(message, level, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshLoggerWrite(message, level, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
             public static void Write(string message, MessageLevel level)
             {
-                Gmsh_Warp.GmshLoggerWrite(message, Enum.GetName(level.GetType(), level).ToLower(), ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshLoggerWrite(message, Enum.GetName(level.GetType(), level).ToLower(), ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -37,7 +37,7 @@ namespace GmshNet
             /// </summary>
             public static void Start()
             {
-                Gmsh_Warp.GmshLoggerStart(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshLoggerStart(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -50,7 +50,7 @@ namespace GmshNet
                 {
                     byte** errorptr;
                     long log_n = 0;
-                    Gmsh_Warp.GmshLoggerGet(&errorptr, ref log_n, ref _staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshLoggerGet(&errorptr, ref log_n, ref _staticreff);
 
                     var messages = UnsafeHelp.ToString(errorptr, log_n);
                     if (_staticreff != 0)
@@ -68,7 +68,7 @@ namespace GmshNet
             /// </summary>
             public static void Stop()
             {
-                Gmsh_Warp.GmshLoggerStop(ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshLoggerStop(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -77,7 +77,7 @@ namespace GmshNet
             /// </summary>
             public static double GetWallTime()
             {
-                var time = Gmsh_Warp.GmshLoggerGetWallTime(ref Gmsh._staticreff);
+                var time = Gmsh_wrap.Gmsh_wrap.GmshLoggerGetWallTime(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 return time;
             }
@@ -87,7 +87,7 @@ namespace GmshNet
             /// </summary>
             public static double GetCpuTime()
             {
-                var time = Gmsh_Warp.GmshLoggerGetCpuTime(ref Gmsh._staticreff);
+                var time = Gmsh_wrap.Gmsh_wrap.GmshLoggerGetCpuTime(ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 return time;
             }
@@ -100,11 +100,11 @@ namespace GmshNet
                 unsafe
                 {
                     byte* errorptr;
-                    Gmsh_Warp.GmshLoggerGetLastError(&errorptr, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshLoggerGetLastError(&errorptr, ref Gmsh._staticreff);
 
                     var ptr = new IntPtr(errorptr);
                     var error = Marshal.PtrToStringAnsi(ptr);
-                    Gmsh_Warp.GmshFree(ptr);
+                    Gmsh_wrap.Gmsh_wrap.GmshFree(ptr);
 
                     if (Gmsh._staticreff != 0)
                     {

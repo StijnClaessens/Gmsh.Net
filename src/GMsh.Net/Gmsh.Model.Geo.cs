@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -22,7 +22,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddPoint(double x, double y, double z, double meshsize = 0, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddPoint(x, y, z, meshsize, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddPoint(x, y, z, meshsize, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -34,7 +34,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddLine(int startTag, int endTag, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddLine(startTag, endTag, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddLine(startTag, endTag, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -48,7 +48,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCircleArc(int startTag, int centerTag, int endTag, int tag = -1, double nx = 0, double ny = 0, double nz = 0)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddCircleArc(startTag, centerTag, endTag, tag, nx, ny, nz, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddCircleArc(startTag, centerTag, endTag, tag, nx, ny, nz, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -63,7 +63,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddEllipseArc(int startTag, int centerTag, int majorTag, int endTag, int tag = -1, double nx = 0, double ny = 0, double nz = 0)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddEllipseArc(startTag, centerTag, majorTag, endTag, tag, nx, ny, nz, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddEllipseArc(startTag, centerTag, majorTag, endTag, tag, nx, ny, nz, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -76,7 +76,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSpline(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -89,7 +89,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBSpline(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddBSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddBSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -101,7 +101,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBezier(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddBezier(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddBezier(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -114,7 +114,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddPolyline(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddPolyline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddPolyline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -127,7 +127,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCompoundSpline(int[] curveTags, int numIntervals = 5, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddCompoundSpline(curveTags, curveTags.LongLength, numIntervals, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddCompoundSpline(curveTags, curveTags.LongLength, numIntervals, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -140,7 +140,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCompoundBSpline(int[] curveTags, int numIntervals = 20, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddCompoundBSpline(curveTags, curveTags.LongLength, numIntervals, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddCompoundBSpline(curveTags, curveTags.LongLength, numIntervals, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -155,7 +155,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCurveLoop(int[] curveTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddCurveLoop(curveTags, curveTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddCurveLoop(curveTags, curveTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -170,7 +170,7 @@ namespace GmshNet
                     {
                         int* pointTags_ptr;
                         long pointTags_n = 0;
-                        Gmsh_Warp.GmshModelGeoAddCurveLoops(curveTags, curveTags.LongLength, &pointTags_ptr, ref pointTags_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddCurveLoops(curveTags, curveTags.LongLength, &pointTags_ptr, ref pointTags_n, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         var tags = UnsafeHelp.ToIntArray(pointTags_ptr, pointTags_n);
                         return tags;
@@ -185,7 +185,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddPlaneSurface(int[] wireTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddPlaneSurface(wireTags, wireTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddPlaneSurface(wireTags, wireTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -198,7 +198,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSurfaceFilling(int[] wireTags, int tag = -1, int sphereCenterTag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddSurfaceFilling(wireTags, wireTags.LongLength, tag, sphereCenterTag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddSurfaceFilling(wireTags, wireTags.LongLength, tag, sphereCenterTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -210,7 +210,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSurfaceLoop(int[] surfaceTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddSurfaceLoop(surfaceTags, surfaceTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddSurfaceLoop(surfaceTags, surfaceTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -223,7 +223,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddVolume(int[] shellTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoAddVolume(shellTags, shellTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoAddVolume(shellTags, shellTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -246,7 +246,7 @@ namespace GmshNet
                         long outcount = 0;
                         if (numElements == default) numElements = new int[0];
                         if (heights == default) heights = new double[0];
-                        Gmsh_Warp.GmshModelGeoExtrude(dimarray, dimarray.LongLength, dx, dy, dz, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoExtrude(dimarray, dimarray.LongLength, dx, dy, dz, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
 
                         var outDimTagsint = UnsafeHelp.ToIntArray(ptrss, outcount);
@@ -273,7 +273,7 @@ namespace GmshNet
                         long outcount = 0;
                         if (numElements == default) numElements = new int[0];
                         if (heights == default) heights = new double[0];
-                        Gmsh_Warp.GmshModelGeoRevolve(dimarray, dimarray.LongLength, x, y, z, ax, ay, az, angle, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoRevolve(dimarray, dimarray.LongLength, x, y, z, ax, ay, az, angle, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         var outDimTagsint = new int[outcount];
                         Marshal.Copy(new IntPtr(ptrss), outDimTagsint, 0, outDimTagsint.Length);
@@ -301,7 +301,7 @@ namespace GmshNet
                         long outcount = 0;
                         if (numElements == default) numElements = new int[0];
                         if (heights == default) heights = new double[0];
-                        Gmsh_Warp.GmshModelGeoTwist(dimarray, dimarray.LongLength, x, y, z, dx, dy, dz, ax, ay, az, angle, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoTwist(dimarray, dimarray.LongLength, x, y, z, dx, dy, dz, ax, ay, az, angle, &ptrss, ref outcount, numElements, numElements.LongLength, heights, heights.LongLength, Convert.ToInt32(recombine), ref Gmsh._staticreff);
 
                         var array = UnsafeHelp.ToIntArray(ptrss, outcount);
                         outDimTags = array.ToIntPair();
@@ -315,7 +315,7 @@ namespace GmshNet
                 public static void Translate(ValueTuple<int, int>[] dimTags, double dx, double dy, double dz)
                 {
                     var list = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoTranslate(list, list.LongLength, dx, dy, dz, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoTranslate(list, list.LongLength, dx, dy, dz, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -327,14 +327,14 @@ namespace GmshNet
                 public static void Rotate(ValueTuple<int, int>[] dimTags, double x, double y, double z, double ax, double ay, double az, double angle)
                 {
                     var list = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoRotate(list, list.LongLength, x, y, z, ax, ay, az, angle, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoRotate(list, list.LongLength, x, y, z, ax, ay, az, angle, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
                 public static void Dilate(ValueTuple<int, int>[] dimTags, double x, double y, double z, double a, double b, double c)
                 {
                     var list = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoDilate(list, list.LongLength, x, y, z, a, b, c, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoDilate(list, list.LongLength, x, y, z, a, b, c, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -345,7 +345,7 @@ namespace GmshNet
                 public static void Mirror(ValueTuple<int, int>[] dimTags, double a, double b, double c, double d)
                 {
                     var list = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoMirror(list, list.LongLength, a, b, c, d, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoMirror(list, list.LongLength, a, b, c, d, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -357,7 +357,7 @@ namespace GmshNet
                 public static void Symmetrize(ValueTuple<int, int>[] dimTags, double a, double b, double c, double d)
                 {
                     var list = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoSymmetrize(list, list.LongLength, a, b, c, d, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoSymmetrize(list, list.LongLength, a, b, c, d, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -372,7 +372,7 @@ namespace GmshNet
                     unsafe
                     {
                         int* ptrss;
-                        Gmsh_Warp.GmshModelGeoCopy(list, list.LongLength, &ptrss, ref outcount, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoCopy(list, list.LongLength, &ptrss, ref outcount, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
 
                         var outDimTagsint = UnsafeHelp.ToIntArray(ptrss, outcount);
@@ -387,7 +387,7 @@ namespace GmshNet
                 public static void Remove(ValueTuple<int, int>[] dimTags, bool recursive = false)
                 {
                     var dimarray = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelGeoRemove(dimarray, dimarray.LongLength, Convert.ToInt32(recursive), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoRemove(dimarray, dimarray.LongLength, Convert.ToInt32(recursive), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -397,7 +397,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RemoveAllDuplicates()
                 {
-                    Gmsh_Warp.GmshModelGeoRemoveAllDuplicates(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoRemoveAllDuplicates(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -411,7 +411,7 @@ namespace GmshNet
                     {
                         int* pointTags_ptr;
                         long pointTags_n = 0;
-                        Gmsh_Warp.GmshModelGeoSplitCurve(tag, pointTags, pointTags.LongLength, &pointTags_ptr, ref pointTags_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelGeoSplitCurve(tag, pointTags, pointTags.LongLength, &pointTags_ptr, ref pointTags_n, ref Gmsh._staticreff);
                         var curveTags = UnsafeHelp.ToIntArray(pointTags_ptr, pointTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return curveTags;
@@ -424,7 +424,7 @@ namespace GmshNet
                 /// </summary>
                 public static int GetMaxTag(int dim)
                 {
-                    var index = Gmsh_Warp.GmshModelGeoGetMaxTag(dim, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelGeoGetMaxTag(dim, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -435,7 +435,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetMaxTag(int dim, int maxTag)
                 {
-                    Gmsh_Warp.GmshModelGeoSetMaxTag(dim, maxTag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoSetMaxTag(dim, maxTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -447,7 +447,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Synchronize()
                 {
-                    Gmsh_Warp.GmshModelGeoSynchronize(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelGeoSynchronize(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }

@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -23,7 +23,7 @@ namespace GmshNet
                 {
                     byte** names_ptr;
                     int names_n = 0;
-                    Gmsh_Warp.GmshParserGetNames(name, &names_ptr, ref names_n, ref Gmsh._staticreff);                    
+                    Gmsh_wrap.Gmsh_wrap.GmshParserGetNames(name, &names_ptr, ref names_n, ref Gmsh._staticreff);                    
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return UnsafeHelp.ToString(names_ptr, names_n); 
                 }
@@ -35,7 +35,7 @@ namespace GmshNet
             /// </summary>
             public static void SetNumber(string name, double[] value)
             {
-                Gmsh_Warp.GmshParserSetNumber(name, value, value.LongLength, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshParserSetNumber(name, value, value.LongLength, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -48,7 +48,7 @@ namespace GmshNet
                 unsafe
                 {
                     byte* dataptr = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(value, 0);
-                    Gmsh_Warp.GmshParserSetString(name, &dataptr, value.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshParserSetString(name, &dataptr, value.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }
@@ -64,7 +64,7 @@ namespace GmshNet
                 {
                     double* tags_ptr;
                     long tags_n = 0;
-                    Gmsh_Warp.GmshParserGetNumber(name, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshParserGetNumber(name, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
                     var value = UnsafeHelp.ToDoubleArray(tags_ptr, tags_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
@@ -91,7 +91,7 @@ namespace GmshNet
                 {
                     byte** value_ptr;
                     long value_n = 0;
-                    Gmsh_Warp.GmshParserGetString(name, &value_ptr, ref value_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshParserGetString(name, &value_ptr, ref value_n, ref Gmsh._staticreff);
                     var value = UnsafeHelp.ToString(value_ptr, value_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return value;
@@ -103,7 +103,7 @@ namespace GmshNet
             /// </summary>
             public static void Clear(string name = "")
 			{
-                Gmsh_Warp.GmshParserClear(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshParserClear(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -112,7 +112,7 @@ namespace GmshNet
             /// </summary>
             public static void Parse(string name)
             {
-                Gmsh_Warp.GmshParserParse(name, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshParserParse(name, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 

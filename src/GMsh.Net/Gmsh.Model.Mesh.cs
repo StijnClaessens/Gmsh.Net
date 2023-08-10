@@ -1,4 +1,4 @@
-using Gmsh_warp;
+using Gmsh_wrap;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Generate(int dim)
                 {
-                    Gmsh_Warp.GmshModelMeshGenerate(dim, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshGenerate(dim, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -33,7 +33,7 @@ namespace GmshNet
                 {
                     if (elementTags == default) elementTags = new long[0];
                     if (partitions == default) partitions = new int[0];
-                    Gmsh_Warp.GmshModelMeshPartition(numPart, elementTags, elementTags.Length, partitions, partitions.Length, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshPartition(numPart, elementTags, elementTags.Length, partitions, partitions.Length, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -42,7 +42,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Unpartition()
                 {
-                    Gmsh_Warp.GmshModelMeshUnpartition(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshUnpartition(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -60,7 +60,7 @@ namespace GmshNet
                 {
                     if (dimTags == default) dimTags = new (int, int)[0];
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshOptimize(method, Convert.ToInt32(force), niter, dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshOptimize(method, Convert.ToInt32(force), niter, dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -69,7 +69,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Recombine()
                 {
-                    Gmsh_Warp.GmshModelMeshRecombine(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRecombine(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -78,7 +78,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Refine()
                 {
-                    Gmsh_Warp.GmshModelMeshRefine(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRefine(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -87,7 +87,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetOrder(int order)
                 {
-                    Gmsh_Warp.GmshModelMeshSetOrder(order, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetOrder(order, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -101,7 +101,7 @@ namespace GmshNet
                     {
                         int* dimTag_ptr;
                         long dimTag_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetLastEntityError(&dimTag_ptr, ref dimTag_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetLastEntityError(&dimTag_ptr, ref dimTag_n, ref Gmsh._staticreff);
                         var dimTag = UnsafeHelp.ToIntArray(dimTag_ptr, dimTag_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return dimTag.ToIntPair();
@@ -118,7 +118,7 @@ namespace GmshNet
                     {
                         long* nodeTag_ptr;
                         long nodeTag_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetLastNodeError(&nodeTag_ptr, ref nodeTag_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetLastNodeError(&nodeTag_ptr, ref nodeTag_n, ref Gmsh._staticreff);
                         var nodeTag = UnsafeHelp.ToLongArray(nodeTag_ptr, nodeTag_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return nodeTag;
@@ -134,7 +134,7 @@ namespace GmshNet
                 public static void Clear(ValueTuple<int, int>[] dimTags)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshClear(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshClear(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -163,7 +163,7 @@ namespace GmshNet
                         long coord_n = 0;
                         double* parametricCoord_ptr;
                         long parametricCoord_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetNodes(&nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, dim, tag, Convert.ToInt32(includeBoundary), Convert.ToInt32(returnParametricCoord), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNodes(&nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, dim, tag, Convert.ToInt32(includeBoundary), Convert.ToInt32(returnParametricCoord), ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
                         parametricCoord = UnsafeHelp.ToDoubleArray(parametricCoord_ptr, parametricCoord_n);
@@ -185,7 +185,7 @@ namespace GmshNet
                         long coord_n = 0;
                         double* parametricCoord_ptr;
                         long parametricCoord_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetNodesByElementType(elementType, &nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, tag, Convert.ToInt32(returnParametricCoord), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNodesByElementType(elementType, &nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, tag, Convert.ToInt32(returnParametricCoord), ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
                         parametricCoord = UnsafeHelp.ToDoubleArray(parametricCoord_ptr, parametricCoord_n);
@@ -210,7 +210,7 @@ namespace GmshNet
                         long parametricCoord_n = 0;
                         dim = -1;
                         tag = -1;
-                        Gmsh_Warp.GmshModelMeshGetNode(nodeTag, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, ref dim, ref tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNode(nodeTag, &coord_ptr, ref coord_n, &parametricCoord_ptr, ref parametricCoord_n, ref dim, ref tag, ref Gmsh._staticreff);
                         coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
                         parametricCoord = UnsafeHelp.ToDoubleArray(parametricCoord_ptr, parametricCoord_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -225,7 +225,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetNode(long nodeTag, double[] coord, double[] parametricCoord)
                 {
-                    Gmsh_Warp.GmshModelMeshSetNode(nodeTag, coord, coord.LongLength, parametricCoord, parametricCoord.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetNode(nodeTag, coord, coord.LongLength, parametricCoord, parametricCoord.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -234,7 +234,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RebuildNodeCache(bool onlyIfNecessary = true)
                 {
-                    Gmsh_Warp.GmshModelMeshRebuildNodeCache(Convert.ToInt32(onlyIfNecessary), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRebuildNodeCache(Convert.ToInt32(onlyIfNecessary), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -243,7 +243,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RebuildElementCache(bool onlyIfNecessary = true)
                 {
-                    Gmsh_Warp.GmshModelMeshRebuildElementCache(Convert.ToInt32(onlyIfNecessary), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRebuildElementCache(Convert.ToInt32(onlyIfNecessary), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -261,7 +261,7 @@ namespace GmshNet
                         long nodeTags_n = 0;
                         double* coord_ptr;
                         long coord_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetNodesForPhysicalGroup(dim, tag, &nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNodesForPhysicalGroup(dim, tag, &nodeTags_ptr, ref nodeTags_n, &coord_ptr, ref coord_n, ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -282,7 +282,7 @@ namespace GmshNet
                 public static void AddNodes(int dim, int tag, long[] nodeTags, double[] coord, double[] parametricCoord = default)
                 {
                     if (parametricCoord == default) parametricCoord = new double[0];
-                    Gmsh_Warp.GmshModelMeshAddNodes(dim, tag, nodeTags, nodeTags.LongLength, coord, coord.LongLength, parametricCoord, parametricCoord.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshAddNodes(dim, tag, nodeTags, nodeTags.LongLength, coord, coord.LongLength, parametricCoord, parametricCoord.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -294,7 +294,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ReclassifyNodes()
                 {
-                    Gmsh_Warp.GmshModelMeshReclassifyNodes(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshReclassifyNodes(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -306,7 +306,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RelocateNodes(int dim = -1, int tag = -1)
                 {
-                    Gmsh_Warp.GmshModelMeshRelocateNodes(dim, tag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRelocateNodes(dim, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -340,7 +340,7 @@ namespace GmshNet
                         long* nodeTags_nptr;
                         long nodeTags_nn = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetElements(&elementTypesptr, ref elementTypes_n, &elementTags_ptr, &elementTags_nptr, ref elementTags_nn, &nodeTags_ptr, &nodeTags_nptr, ref nodeTags_nn, dim, tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElements(&elementTypesptr, ref elementTypes_n, &elementTags_ptr, &elementTags_nptr, ref elementTags_nn, &nodeTags_ptr, &nodeTags_nptr, ref nodeTags_nn, dim, tag, ref Gmsh._staticreff);
 
                         elementTypes = UnsafeHelp.ToIntArray(elementTypesptr, elementTypes_n);
                         elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_nptr, elementTags_nn);
@@ -364,7 +364,7 @@ namespace GmshNet
                         long nodeTags_n = 0;
                         dim = -1;
                         tag = -1;
-                        Gmsh_Warp.GmshModelMeshGetElement(elementTag, ref elementType, &nodeTags_ptr, ref nodeTags_n, ref dim, ref tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElement(elementTag, ref elementType, &nodeTags_ptr, ref nodeTags_n, ref dim, ref tag, ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
@@ -388,7 +388,7 @@ namespace GmshNet
                         u = 0; v = 0; w = 0;
                         long* nodeTags_ptr;
                         long nodeTags_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetElementByCoordinates(x, y, z, ref elementTag, ref elementType, &nodeTags_ptr, ref nodeTags_n, ref u, ref v, ref w, dim, Convert.ToInt32(strict), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementByCoordinates(x, y, z, ref elementTag, ref elementType, &nodeTags_ptr, ref nodeTags_n, ref u, ref v, ref w, dim, Convert.ToInt32(strict), ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
@@ -409,7 +409,7 @@ namespace GmshNet
                     {
                         long* elementTags_ptr;
                         long elementTags_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetElementsByCoordinates(x, y, z, &elementTags_ptr, ref elementTags_n, dim, Convert.ToInt32(strict), ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementsByCoordinates(x, y, z, &elementTags_ptr, ref elementTags_n, dim, Convert.ToInt32(strict), ref Gmsh._staticreff);
                         elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
@@ -425,7 +425,7 @@ namespace GmshNet
                 public static void GetLocalCoordinatesInElement(long elementTag, double x, double y, double z, out double u, out double v, out double w)
                 {
                     u = 0; v = 0; w = 0;
-                    Gmsh_Warp.GmshModelMeshGetLocalCoordinatesInElement(elementTag, x, y, z, ref u, ref v, ref w, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetLocalCoordinatesInElement(elementTag, x, y, z, ref u, ref v, ref w, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -440,7 +440,7 @@ namespace GmshNet
                     {
                         int* elementTypes_ptr;
                         long elementTypes_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetElementTypes(&elementTypes_ptr, ref elementTypes_n, dim, tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementTypes(&elementTypes_ptr, ref elementTypes_n, dim, tag, ref Gmsh._staticreff);
                         var elementTypes = UnsafeHelp.ToIntArray(elementTypes_ptr, elementTypes_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return elementTypes;
@@ -455,7 +455,7 @@ namespace GmshNet
                 /// </summary>
                 public static int GetElementType(string familyname, int order = -1, bool serendip = false)
                 {
-                    var index = Gmsh_Warp.GmshModelMeshGetElementType(familyname, order, Convert.ToInt32(serendip), ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementType(familyname, order, Convert.ToInt32(serendip), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -475,7 +475,7 @@ namespace GmshNet
                         double* localNodeCoordptr;
                         long localNodeCoord_n = 0;
                         dim = 0; order = 0; numNodes = 0; numPrimaryNodes = 0;
-                        Gmsh_Warp.GmshModelMeshGetElementProperties(elementType, &elementNameptr, ref dim, ref order, ref numNodes, &localNodeCoordptr, ref localNodeCoord_n, ref numPrimaryNodes, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementProperties(elementType, &elementNameptr, ref dim, ref order, ref numNodes, &localNodeCoordptr, ref localNodeCoord_n, ref numPrimaryNodes, ref Gmsh._staticreff);
                         elementName = UnsafeHelp.ToString(elementNameptr);
                         localNodeCoord = UnsafeHelp.ToDoubleArray(localNodeCoordptr, localNodeCoord_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -502,7 +502,7 @@ namespace GmshNet
                         long* nodeTags_ptr;
                         long nodeTags_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetElementsByType(elementType, &elementTags_ptr, ref elementTags_n, &nodeTags_ptr, ref nodeTags_n, tag, task, numTasks, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementsByType(elementType, &elementTags_ptr, ref elementTags_n, &nodeTags_ptr, ref nodeTags_n, tag, task, numTasks, ref Gmsh._staticreff);
                         elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_n);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -521,7 +521,7 @@ namespace GmshNet
                         long nodeTags_n = 0;
                         long* elementTags_ptr;
                         long elementTags_n = 0;
-                        Gmsh_Warp.GmshModelMeshPreallocateElementsByType(elementType, Convert.ToInt32(elementTag), Convert.ToInt32(nodeTag),
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshPreallocateElementsByType(elementType, Convert.ToInt32(elementTag), Convert.ToInt32(nodeTag),
                             &elementTags_ptr, ref elementTags_n, &nodeTags_ptr, ref nodeTags_n, tag, ref Gmsh._staticreff);
                         nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
                         elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_n);
@@ -547,7 +547,7 @@ namespace GmshNet
                     {
                         var eptr = (long*)Marshal.UnsafeAddrOfPinnedArrayElement(elementTags, 0).ToPointer();
                         var nptr = (long*)Marshal.UnsafeAddrOfPinnedArrayElement(nodeTags, 0).ToPointer();
-                        Gmsh_Warp.GmshModelMeshAddElements(dim, tag, elementTypes, elementTypes.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshAddElements(dim, tag, elementTypes, elementTypes.LongLength,
                             &eptr, elementTags.Select(e => e.LongLength).ToArray(), elementTags.LongLength,
                             &nptr, nodeTags.Select(e => e.LongLength).ToArray(), nodeTags.LongLength,
                             ref Gmsh._staticreff);
@@ -566,7 +566,7 @@ namespace GmshNet
                 /// </summary>
                 public static void AddElementsByType(int tag, int elementType, long[] elementTags, long[] nodeTags)
                 {
-                    Gmsh_Warp.GmshModelMeshAddElementsByType(tag, elementType, elementTags, elementTags.LongLength, nodeTags, nodeTags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshAddElementsByType(tag, elementType, elementTags, elementTags.LongLength, nodeTags, nodeTags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -587,7 +587,7 @@ namespace GmshNet
                         double* weights_ptr;
                         long weights_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetIntegrationPoints(elementType, integrationType, &localCoord_ptr, ref localCoord_n, &weights_ptr, ref weights_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetIntegrationPoints(elementType, integrationType, &localCoord_ptr, ref localCoord_n, &weights_ptr, ref weights_n, ref Gmsh._staticreff);
 
                         localCoord = UnsafeHelp.ToDoubleArray(localCoord_ptr, localCoord_n);
                         weights = UnsafeHelp.ToDoubleArray(weights_ptr, weights_n);
@@ -622,7 +622,7 @@ namespace GmshNet
                         double* coord_ptr;
                         long coord_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetJacobians(elementType, localCoord, localCoord.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetJacobians(elementType, localCoord, localCoord.LongLength,
                             &jacobians_ptr, ref jacobians_n, &determinants_ptr, ref determinants_n, &coord_ptr, ref coord_n,
                             tag, task, numTasks,
                             ref Gmsh._staticreff);
@@ -648,7 +648,7 @@ namespace GmshNet
                         double* coord_ptr;
                         long coord_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshPreallocateJacobians(elementType, numEvaluationPoints, Convert.ToInt32(allocateJacobians), Convert.ToInt32(allocateDeterminants), Convert.ToInt32(allocateCoord),
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshPreallocateJacobians(elementType, numEvaluationPoints, Convert.ToInt32(allocateJacobians), Convert.ToInt32(allocateDeterminants), Convert.ToInt32(allocateCoord),
                             &jacobians_ptr, ref jacobians_n, &determinants_ptr, ref determinants_n, &coord_ptr, ref coord_n,
                             tag, ref Gmsh._staticreff);
 
@@ -683,7 +683,7 @@ namespace GmshNet
                         double* coord_ptr;
                         long coord_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetJacobian(elementTag, localCoord, localCoord.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetJacobian(elementTag, localCoord, localCoord.LongLength,
                             &jacobians_ptr, ref jacobians_n, &determinants_ptr, ref determinants_n, &coord_ptr, ref coord_n,
                             ref Gmsh._staticreff);
 
@@ -721,7 +721,7 @@ namespace GmshNet
                         numComponents = 0;
                         numOrientations = 0;
                         if (wantedOrientations == default) wantedOrientations = new int[0];
-                        Gmsh_Warp.GmshModelMeshGetBasisFunctions(elementType, localCoord, localCoord.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetBasisFunctions(elementType, localCoord, localCoord.LongLength,
                             functionSpaceType, ref numComponents, &basisFunctions_ptr, ref basisFunctions_n, ref numOrientations,
                             wantedOrientations, wantedOrientations.LongLength,
                             ref Gmsh._staticreff);
@@ -746,7 +746,7 @@ namespace GmshNet
                         int* basisFunctionsOrientation_ptr;
                         long basisFunctionsOrientation_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetBasisFunctionsOrientation(elementType, functionSpaceType, &basisFunctionsOrientation_ptr, ref basisFunctionsOrientation_n,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetBasisFunctionsOrientation(elementType, functionSpaceType, &basisFunctionsOrientation_ptr, ref basisFunctionsOrientation_n,
                             tag, task, numTasks,
                             ref Gmsh._staticreff);
 
@@ -761,7 +761,7 @@ namespace GmshNet
                 public static int GetBasisFunctionsOrientationForElement(long elementTag, string functionSpaceType)
                 {
                     int basisFunctionsOrientation = 0;
-                    Gmsh_Warp.GmshModelMeshGetBasisFunctionsOrientationForElement(elementTag, functionSpaceType, ref basisFunctionsOrientation,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetBasisFunctionsOrientationForElement(elementTag, functionSpaceType, ref basisFunctionsOrientation,
                         ref Gmsh._staticreff);
 
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -774,7 +774,7 @@ namespace GmshNet
                 /// </summary>
                 public static int GetNumberOfOrientations(int elementType, string functionSpaceType)
                 {
-                    var index = Gmsh_Warp.GmshModelMeshGetNumberOfOrientations(elementType, functionSpaceType, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNumberOfOrientations(elementType, functionSpaceType, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -788,7 +788,7 @@ namespace GmshNet
                     {
                         int* basisFunctionsOrientation_ptr;
                         long basisFunctionsOrientation_n = 0;
-                        Gmsh_Warp.GmshModelMeshPreallocateBasisFunctionsOrientation(elementType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshPreallocateBasisFunctionsOrientation(elementType,
                              &basisFunctionsOrientation_ptr, ref basisFunctionsOrientation_n, tag, ref Gmsh._staticreff);
                         var basisFunctionsOrientation = UnsafeHelp.ToIntArray(basisFunctionsOrientation_ptr, basisFunctionsOrientation_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -807,7 +807,7 @@ namespace GmshNet
                         int* edgeNum_ptr;
                         long edgeNum_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetEdges(edgeNodes, edgeNodes.LongLength, &edgeNum_ptr, ref edgeNum_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetEdges(edgeNodes, edgeNodes.LongLength, &edgeNum_ptr, ref edgeNum_n, ref Gmsh._staticreff);
 
                         var edgeNum = UnsafeHelp.ToIntArray(edgeNum_ptr, edgeNum_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -831,7 +831,7 @@ namespace GmshNet
                         int* faceOrientations_ptr;
                         long faceOrientations_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetGetFaces(faceType, nodeTags, nodeTags.LongLength, &faceTags_ptr, ref faceTags_n, &faceOrientations_ptr, ref faceOrientations_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetGetFaces(faceType, nodeTags, nodeTags.LongLength, &faceTags_ptr, ref faceTags_n, &faceOrientations_ptr, ref faceOrientations_n, ref Gmsh._staticreff);
 
                         faceTags = UnsafeHelp.ToIntArray(faceTags_ptr, faceTags_n);
                         faceOrientations = UnsafeHelp.ToIntArray(faceOrientations_ptr, faceOrientations_n);
@@ -852,7 +852,7 @@ namespace GmshNet
 				{
                     if (dimTags == default) dimTags = new (int, int)[0];
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshCreateEdges(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshCreateEdges(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -866,7 +866,7 @@ namespace GmshNet
                 public static void CreateFaces(ValueTuple<int, int>[] dimTags = default)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshCreateFaces(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshCreateFaces(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -877,7 +877,7 @@ namespace GmshNet
                 public static void RemoveConstraints(ValueTuple<int, int>[] dimTags = default)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshRemoveConstraints(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRemoveConstraints(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -891,7 +891,7 @@ namespace GmshNet
                     {
                         int* ptrss;
                         long outcount = 0;
-                        Gmsh_Warp.GmshModelMeshGetEmbedded(dim, tag, &ptrss, ref outcount, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetEmbedded(dim, tag, &ptrss, ref outcount, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return UnsafeHelp.ToIntArray(ptrss, outcount).ToIntPair();
                     }
@@ -913,7 +913,7 @@ namespace GmshNet
                         long keys_n = 0;
                         double* coord_ptr;
                         long coord_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetKeys(elementType, functionSpaceType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetKeys(elementType, functionSpaceType,
                              &keys_ptr, ref keys_n, &coord_ptr, ref coord_n, tag, Convert.ToInt32(returnCoord), ref Gmsh._staticreff);
                         keys = UnsafeHelp.ToIntArray(keys_ptr, keys_n).ToIntPair();
                         coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
@@ -934,7 +934,7 @@ namespace GmshNet
                         long entityKeys_n = 0;
                         double* coord_ptr;
                         long coord_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetKeysForElement(elementTag, functionSpaceType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetKeysForElement(elementTag, functionSpaceType,
                              &typeKeys_ptr, ref typeKeys_n, &entityKeys_ptr, ref entityKeys_n, &coord_ptr, ref coord_n, Convert.ToInt32(returnCoord), ref Gmsh._staticreff);
                         typeKeys = UnsafeHelp.ToIntArray(typeKeys_ptr, typeKeys_n);
                         entityKeys = UnsafeHelp.ToLongArray(entityKeys_ptr, entityKeys_n);
@@ -949,7 +949,7 @@ namespace GmshNet
                 /// </summary>
                 public static int GetNumberOfKeys(int elementType, string functionSpaceType)
                 {
-                    var index = Gmsh_Warp.GmshModelMeshGetNumberOfKeys(elementType, functionSpaceType, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetNumberOfKeys(elementType, functionSpaceType, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -969,7 +969,7 @@ namespace GmshNet
                         int* infokeys_ptr;
                         long infokeys_n = 0;
                         var key_array = keys.ToIntArray();
-                        Gmsh_Warp.GmshModelMeshGetKeysInformation(key_array, key_array.LongLength, elementType, functionSpaceType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetKeysInformation(key_array, key_array.LongLength, elementType, functionSpaceType,
                              &infokeys_ptr, ref infokeys_n, ref Gmsh._staticreff);
                         var infoKeys = UnsafeHelp.ToIntArray(infokeys_ptr, infokeys_n).ToIntPair();
 
@@ -994,7 +994,7 @@ namespace GmshNet
                         double* barycenters_ptr;
                         long barycenters_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetBarycenters(elementType, tag, Convert.ToInt32(fast), Convert.ToInt32(primary),
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetBarycenters(elementType, tag, Convert.ToInt32(fast), Convert.ToInt32(primary),
                             &barycenters_ptr, ref barycenters_n, task, numTasks, ref Gmsh._staticreff);
 
                         var barycenters = UnsafeHelp.ToDoubleArray(barycenters_ptr, barycenters_n);
@@ -1013,7 +1013,7 @@ namespace GmshNet
                         double* barycenters_ptr;
                         long barycenters_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshPreallocateBarycenters(elementType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshPreallocateBarycenters(elementType,
                             &barycenters_ptr, ref barycenters_n, tag, ref Gmsh._staticreff);
 
                         var barycenters = UnsafeHelp.ToDoubleArray(barycenters_ptr, barycenters_n);
@@ -1040,7 +1040,7 @@ namespace GmshNet
                         long* nodeTags_ptr;
                         long nodeTags_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetElementEdgeNodes(elementType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementEdgeNodes(elementType,
                             &nodeTags_ptr, ref nodeTags_n, tag, Convert.ToInt32(primary), task, numTasks, ref Gmsh._staticreff);
 
                         var nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
@@ -1067,7 +1067,7 @@ namespace GmshNet
                         long* nodeTags_ptr;
                         long nodeTags_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetElementFaceNodes(elementType, faceType,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetElementFaceNodes(elementType, faceType,
                             &nodeTags_ptr, ref nodeTags_n, tag, Convert.ToInt32(primary), task, numTasks, ref Gmsh._staticreff);
 
                         var nodeTags = UnsafeHelp.ToLongArray(nodeTags_ptr, nodeTags_n);
@@ -1089,7 +1089,7 @@ namespace GmshNet
                         int* partitions_ptr;
                         long partitions_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetGhostElements(dim, tag,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetGhostElements(dim, tag,
                             &elementTags_ptr, ref elementTags_n, &partitions_ptr, ref partitions_n, ref Gmsh._staticreff);
 
                         elementTags = UnsafeHelp.ToLongArray(elementTags_ptr, elementTags_n);
@@ -1105,7 +1105,7 @@ namespace GmshNet
                 public static void SetSize(ValueTuple<int, int>[] dimTags, double size)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshSetSize(dimTags_array, dimTags_array.LongLength, size, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetSize(dimTags_array, dimTags_array.LongLength, size, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1116,7 +1116,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetSizeAtParametricPoints(int dim, int tag, double[] parametricCoord, double[] sizes)
                 {
-                    Gmsh_Warp.GmshModelMeshSetSizeAtParametricPoints(dim, tag, parametricCoord, parametricCoord.LongLength, sizes, sizes.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetSizeAtParametricPoints(dim, tag, parametricCoord, parametricCoord.LongLength, sizes, sizes.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1128,7 +1128,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetTransfiniteCurve(int tag, int numNodes, string meshType = "Progression", double coef = 1)
                 {
-                    Gmsh_Warp.GmshModelMeshSetTransfiniteCurve(tag, numNodes, meshType, coef, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetTransfiniteCurve(tag, numNodes, meshType, coef, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1144,7 +1144,7 @@ namespace GmshNet
                 public static void SetTransfiniteSurface(int tag, string arrangement = "Left", int[] cornerTags = default)
                 {
                     if (cornerTags == default) cornerTags = new int[0];
-                    Gmsh_Warp.GmshModelMeshSetTransfiniteSurface(tag, arrangement, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetTransfiniteSurface(tag, arrangement, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1156,7 +1156,7 @@ namespace GmshNet
                 public static void SetTransfiniteVolume(int tag, int[] cornerTags = default)
                 {
                     if (cornerTags == default) cornerTags = new int[0];
-                    Gmsh_Warp.GmshModelMeshSetTransfiniteVolume(tag, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetTransfiniteVolume(tag, cornerTags, cornerTags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1167,7 +1167,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetRecombine(int dim, int tag)
                 {
-                    Gmsh_Warp.GmshModelMeshSetRecombine(dim, tag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetRecombine(dim, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1177,7 +1177,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetSmoothing(int dim, int tag, int val)
                 {
-                    Gmsh_Warp.GmshModelMeshSetSmoothing(dim, tag, val, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetSmoothing(dim, tag, val, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1190,7 +1190,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetReverse(int dim, int tag, bool val = true)
                 {
-                    Gmsh_Warp.GmshModelMeshSetReverse(dim, tag, Convert.ToInt32(val), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetReverse(dim, tag, Convert.ToInt32(val), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1200,7 +1200,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetAlgorithm(int dim, int tag, int val)
                 {
-                    Gmsh_Warp.GmshModelMeshSetAlgorithm(dim, tag, val, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetAlgorithm(dim, tag, val, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1211,7 +1211,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetSizeFromBoundary(int dim, int tag, int val)
                 {
-                    Gmsh_Warp.GmshModelMeshSetSizeFromBoundary(dim, tag, val, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetSizeFromBoundary(dim, tag, val, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1222,7 +1222,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetCompound(int dim, int[] tags)
                 {
-                    Gmsh_Warp.GmshModelMeshSetCompound(dim, tags, tags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetCompound(dim, tags, tags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1234,7 +1234,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetOutwardOrientation(int tag)
                 {
-                    Gmsh_Warp.GmshModelMeshSetOutwardOrientation(tag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetOutwardOrientation(tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1247,7 +1247,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Embed(int dim, int[] tags, int inDim, int inTag)
                 {
-                    Gmsh_Warp.GmshModelMeshEmbed(dim, tags, tags.LongLength, inDim, inTag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshEmbed(dim, tags, tags.LongLength, inDim, inTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1259,7 +1259,7 @@ namespace GmshNet
                 public static void RemoveEmbedded(ValueTuple<int, int>[] dimTags, int dim = -1)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshRemoveEmbedded(dimTags_array, dimTags_array.LongLength, dim, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRemoveEmbedded(dimTags_array, dimTags_array.LongLength, dim, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1269,7 +1269,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ReorderElements(int elementType, int tag, long[] ordering)
                 {
-                    Gmsh_Warp.GmshModelMeshReorderElements(elementType, tag, ordering, ordering.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshReorderElements(elementType, tag, ordering, ordering.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1278,7 +1278,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RenumberNodes()
                 {
-                    Gmsh_Warp.GmshModelMeshRenumberNodes(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRenumberNodes(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1287,7 +1287,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RenumberElements()
                 {
-                    Gmsh_Warp.GmshModelMeshRenumberElements(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRenumberElements(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1303,7 +1303,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetPeriodic(int dim, int[] tags, int[] tagsMaster, double[] affineTransform)
                 {
-                    Gmsh_Warp.GmshModelMeshSetPeriodic(dim, tags, tags.LongLength, tagsMaster, tagsMaster.LongLength, affineTransform, affineTransform.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSetPeriodic(dim, tags, tags.LongLength, tagsMaster, tagsMaster.LongLength, affineTransform, affineTransform.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1317,7 +1317,7 @@ namespace GmshNet
                     {
                         int* tagsMaster_ptr;
                         int tagsMaster_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetPeriodic(dim, tags, tags.LongLength, &tagsMaster_ptr, ref tagsMaster_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetPeriodic(dim, tags, tags.LongLength, &tagsMaster_ptr, ref tagsMaster_n, ref Gmsh._staticreff);
                         var tagsMaster = UnsafeHelp.ToIntArray(tagsMaster_ptr, tagsMaster_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return tagsMaster;
@@ -1337,7 +1337,7 @@ namespace GmshNet
                         long edgeTags_n = 0;
                         long* edgeNodes_ptr = default;
                         long edgeNodes_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetAllEdges(&edgeTags_ptr, ref edgeTags_n, &edgeNodes_ptr, ref edgeNodes_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetAllEdges(&edgeTags_ptr, ref edgeTags_n, &edgeNodes_ptr, ref edgeNodes_n, ref Gmsh._staticreff);
                         edgeTags = UnsafeHelp.ToLongArray(edgeTags_ptr, edgeTags_n);
                         edgeNodes = UnsafeHelp.ToLongArray(edgeNodes_ptr, edgeNodes_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -1357,7 +1357,7 @@ namespace GmshNet
                         long edgeTags_n = 0;
                         long* edgeNodes_ptr = default;
                         long edgeNodes_n = 0;
-                        Gmsh_Warp.GmshModelMeshGetAllFaces(faceType, & edgeTags_ptr, ref edgeTags_n, &edgeNodes_ptr, ref edgeNodes_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetAllFaces(faceType, & edgeTags_ptr, ref edgeTags_n, &edgeNodes_ptr, ref edgeNodes_n, ref Gmsh._staticreff);
                         faceTags = UnsafeHelp.ToLongArray(edgeTags_ptr, edgeTags_n);
                         faceNodes = UnsafeHelp.ToLongArray(edgeNodes_ptr, edgeNodes_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -1370,7 +1370,7 @@ namespace GmshNet
                 /// </summary>
                 public static void GetAddEdges(long[] edgeTags, long[] edgeNodes)
                 {
-                    Gmsh_Warp.GmshModelMeshAddEdges(edgeTags, edgeTags.LongLength, edgeNodes, edgeNodes.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshAddEdges(edgeTags, edgeTags.LongLength, edgeNodes, edgeNodes.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1380,7 +1380,7 @@ namespace GmshNet
                 /// </summary>
                 public static void AddFacees(int faceType, long[] edgeTags, long[] edgeNodes)
                 {
-                    Gmsh_Warp.GmshModelMeshAddFaces(faceType, edgeTags, edgeTags.LongLength, edgeNodes, edgeNodes.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshAddFaces(faceType, edgeTags, edgeTags.LongLength, edgeNodes, edgeNodes.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1403,7 +1403,7 @@ namespace GmshNet
                         double* affineTransform_ptr;
                         long affineTransform_n = 0;
 
-                        Gmsh_Warp.GmshModelMeshGetPeriodicNodes(dim, tag, ref tagsMaster,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetPeriodicNodes(dim, tag, ref tagsMaster,
                             &nodeTags_ptr, ref nodeTags_n, &nodeTagsMaster_ptr, ref nodeTagsMaster_n,
                             &affineTransform_ptr, ref affineTransform_n, Convert.ToInt32(includeHighOrderNodes),
                             ref Gmsh._staticreff);
@@ -1420,7 +1420,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RemoveDuplicateNodes()
                 {
-                    Gmsh_Warp.GmshModelMeshRemoveDuplicateNodes(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshRemoveDuplicateNodes(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1435,7 +1435,7 @@ namespace GmshNet
                     {
                         long* tri_ptr;
                         long tri_n = 0;
-                        Gmsh_Warp.GmshModelMeshTriangulate(coord, coord.LongLength, &tri_ptr, ref tri_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshTriangulate(coord, coord.LongLength, &tri_ptr, ref tri_n, ref Gmsh._staticreff);
                         tri = UnsafeHelp.ToLongArray(tri_ptr, tri_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
@@ -1450,7 +1450,7 @@ namespace GmshNet
                     {
                         long* tri_ptr;
                         long tri_n = 0;
-                        Gmsh_Warp.GmshModelMeshTetrahedralize(coord, coord.LongLength, &tri_ptr, ref tri_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshTetrahedralize(coord, coord.LongLength, &tri_ptr, ref tri_n, ref Gmsh._staticreff);
                         tetra = UnsafeHelp.ToLongArray(tri_ptr, tri_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
@@ -1462,7 +1462,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SplitQuadrangles(double quality = 1, int tag = -1)
                 {
-                    Gmsh_Warp.GmshModelMeshSplitQuadrangles(quality, tag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshSplitQuadrangles(quality, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1478,7 +1478,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ClassifySurfaces(double angle, bool boundary = true, bool forReparametrization = false, double curveAngle =Math.PI, bool exportDiscrete = true)
                 {
-                    Gmsh_Warp.GmshModelMeshClassifySurfaces(angle, Convert.ToInt32(boundary), Convert.ToInt32(forReparametrization), curveAngle, Convert.ToInt32(exportDiscrete), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshClassifySurfaces(angle, Convert.ToInt32(boundary), Convert.ToInt32(forReparametrization), curveAngle, Convert.ToInt32(exportDiscrete), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1493,7 +1493,7 @@ namespace GmshNet
                 {
                     if (dimTags == default) dimTags = new (int, int)[0];
                     var dimarray = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshCreateGeometry(dimarray, dimarray.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshCreateGeometry(dimarray, dimarray.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1507,7 +1507,7 @@ namespace GmshNet
                 /// </summary>
                 public static void CreateTopology(bool makeSimplyConnected = true, bool exportDiscrete = true)
                 {
-                    Gmsh_Warp.GmshModelMeshCreateTopology(Convert.ToInt32(makeSimplyConnected), Convert.ToInt32(exportDiscrete), ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshCreateTopology(Convert.ToInt32(makeSimplyConnected), Convert.ToInt32(exportDiscrete), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1523,7 +1523,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ComputeHomology(int[] domainTags, int[] subdomainTags, int[] dims)
                 {
-                    Gmsh_Warp.GmshModelMeshComputeHomology(domainTags, domainTags.LongLength, subdomainTags, subdomainTags.LongLength, dims, dims.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshComputeHomology(domainTags, domainTags.LongLength, subdomainTags, subdomainTags.LongLength, dims, dims.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1539,7 +1539,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ComputeCohomology(int[] domainTags, int[] subdomainTags, int[] dims)
                 {
-                    Gmsh_Warp.GmshModelMeshComputeCohomology(domainTags, domainTags.LongLength, subdomainTags, subdomainTags.LongLength, dims, dims.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshComputeCohomology(domainTags, domainTags.LongLength, subdomainTags, subdomainTags.LongLength, dims, dims.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1554,7 +1554,7 @@ namespace GmshNet
                     {
                         int* viewTags_ptr;
                         long viewTags_n = 0;
-                        Gmsh_Warp.GmshModelMeshComputeCrossField(&viewTags_ptr, ref viewTags_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshComputeCrossField(&viewTags_ptr, ref viewTags_n, ref Gmsh._staticreff);
                         var viewTags = UnsafeHelp.ToIntArray(viewTags_ptr, viewTags_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return viewTags;
@@ -1569,7 +1569,7 @@ namespace GmshNet
                 {
                     if (dimTags == default) dimTags = new (int, int)[0];
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshReverse(dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshReverse(dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1583,7 +1583,7 @@ namespace GmshNet
                 {
                     if (dimTags == default) dimTags = new (int, int)[0];
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelMeshAffineTransform(affineTransform, affineTransform.LongLength, dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshAffineTransform(affineTransform, affineTransform.LongLength, dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1593,7 +1593,7 @@ namespace GmshNet
                 public static int GetMaxNodeTag()
 				{
                     long maxTag = -1;
-                    Gmsh_Warp.GmshModelMeshGetMaxNodeTag(ref maxTag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetMaxNodeTag(ref maxTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return (int)maxTag;
                 }
@@ -1604,7 +1604,7 @@ namespace GmshNet
                 public static int GetMaxElementTag()
                 {
                     long maxTag = -1;
-                    Gmsh_Warp.GmshModelMeshGetMaxElementTag(ref maxTag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetMaxElementTag(ref maxTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return (int)maxTag;
                 }
@@ -1621,7 +1621,7 @@ namespace GmshNet
                         double* sizes_ptr;
                         long sizes_n = 0;
                         var dimTags_array = dimTags.ToIntArray();
-                        Gmsh_Warp.GmshModelMeshGetSizes(dimTags_array, dimTags.LongLength, &sizes_ptr, ref sizes_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetSizes(dimTags_array, dimTags.LongLength, &sizes_ptr, ref sizes_n, ref Gmsh._staticreff);
                         var sizes = UnsafeHelp.ToDoubleArray(sizes_ptr, sizes_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return sizes;
@@ -1633,7 +1633,7 @@ namespace GmshNet
                 /// </summary>
                 public static void ImportStl()
 				{
-                    Gmsh_Warp.GmshModelMeshImportStl(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelMeshImportStl(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1649,7 +1649,7 @@ namespace GmshNet
                         long nodes_n = 0;
                         if (dimTags == default) dimTags = new (int, int)[0];
                         var dimTags_array = dimTags.ToIntArray();
-                        Gmsh_Warp.GmshModelMeshGetDuplicateNodes(&nodes_ptr, ref nodes_n, dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelMeshGetDuplicateNodes(&nodes_ptr, ref nodes_n, dimTags_array, dimTags.LongLength, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return UnsafeHelp.ToIntArray(nodes_ptr, nodes_n);
                     }

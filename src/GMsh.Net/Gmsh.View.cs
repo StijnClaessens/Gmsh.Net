@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace GmshNet
             /// </summary>
             public static int Add(string name, int tag = -1)
             {
-                var index = Gmsh_Warp.GmshViewAdd(name, tag, ref Gmsh._staticreff);
+                var index = Gmsh_wrap.Gmsh_wrap.GmshViewAdd(name, tag, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 return index;
             }
@@ -31,7 +31,7 @@ namespace GmshNet
             /// </summary>
             public static void Remove(int tag)
             {
-                Gmsh_Warp.GmshViewRemove(tag, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewRemove(tag, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -42,7 +42,7 @@ namespace GmshNet
             /// </summary>
             public static void GetIndex(int tag)
             {
-                Gmsh_Warp.GmshViewGetIndex(tag, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewGetIndex(tag, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -55,7 +55,7 @@ namespace GmshNet
                 {
                     int* tags_ptr;
                     long tags_n = 0;
-                    Gmsh_Warp.GmshViewGetTags(&tags_ptr, ref tags_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewGetTags(&tags_ptr, ref tags_n, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return UnsafeHelp.ToIntArray(tags_ptr, tags_n);
                 }
@@ -80,7 +80,7 @@ namespace GmshNet
                 unsafe
                 {
                     var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(data, 0);
-                    Gmsh_Warp.GmshViewAddModelData(tag, step, modelName, dataType, tags, tags.LongLength, (double**)ptr.ToPointer(), data.Select(d => d.LongLength).ToArray(), data.LongLength, time, numComponents, partition, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewAddModelData(tag, step, modelName, dataType, tags, tags.LongLength, (double**)ptr.ToPointer(), data.Select(d => d.LongLength).ToArray(), data.LongLength, time, numComponents, partition, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }
@@ -94,7 +94,7 @@ namespace GmshNet
             /// </summary>
             public static void AddHomogeneousModelData(int tag, int step, string modelName, string dataType, long[] tags, double[] data, double time = 0, int numComponents = -1, int partition = 0)
             {
-                Gmsh_Warp.GmshViewAddHomogeneousModelData(tag, step, modelName, dataType, tags, tags.LongLength, data, data.LongLength, time, numComponents, partition, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewAddHomogeneousModelData(tag, step, modelName, dataType, tags, tags.LongLength, data, data.LongLength, time, numComponents, partition, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -117,7 +117,7 @@ namespace GmshNet
                     long data_nn = 0;
                     time = 0; numComponents = 0;
 
-                    Gmsh_Warp.GmshViewGetModelData(tag, step, &dataType_ptr, &tags_ptr, ref tags_n, &data_ptr, &data_n_ptr, ref data_nn, ref time, ref numComponents, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewGetModelData(tag, step, &dataType_ptr, &tags_ptr, ref tags_n, &data_ptr, &data_n_ptr, ref data_nn, ref time, ref numComponents, ref Gmsh._staticreff);
                     dataType = UnsafeHelp.ToString(dataType_ptr);
                     tags = UnsafeHelp.ToLongArray(tags_ptr, tags_n);
                     data = UnsafeHelp.ToDoubleArray(data_ptr, data_n_ptr, data_nn);
@@ -139,7 +139,7 @@ namespace GmshNet
             /// </summary>
             public static void AddListData(int tag, string dataType, int numEle, double[] data)
             {
-                Gmsh_Warp.GmshViewAddListData(tag, dataType, numEle, data, data.LongLength, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewAddListData(tag, dataType, numEle, data, data.LongLength, ref Gmsh._staticreff);
 
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
@@ -163,7 +163,7 @@ namespace GmshNet
                     long* data_n_ptr;
                     long data_nn = 0;
 
-                    Gmsh_Warp.GmshViewGetListData(tag, &dataType_ptr, ref dataType_n, &numElements_ptr, ref numElements_n, &data_ptr, &data_n_ptr, ref data_nn, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewGetListData(tag, &dataType_ptr, ref dataType_n, &numElements_ptr, ref numElements_n, &data_ptr, &data_n_ptr, ref data_nn, ref Gmsh._staticreff);
                     dataType = UnsafeHelp.ToString(dataType_ptr, dataType_n);
                     numElements = UnsafeHelp.ToIntArray(numElements_ptr, numElements_n);
                     data = UnsafeHelp.ToDoubleArray(data_ptr, data_n_ptr, data_nn);
@@ -192,7 +192,7 @@ namespace GmshNet
                     byte* dataptr = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(data, 0);
                     if (style == default) style = new string[0];
                     byte* styleptr = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(style, 0);
-                    Gmsh_Warp.GmshViewAddListDataString(tag, coord, coord.LongLength, &dataptr, data.LongLength, &styleptr, style.LongLength, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewAddListDataString(tag, coord, coord.LongLength, &dataptr, data.LongLength, &styleptr, style.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
             }
@@ -213,7 +213,7 @@ namespace GmshNet
                     byte** style_ptr;
                     long style_n = 0;
 
-                    Gmsh_Warp.GmshViewGetListDataStrings(tag, dim, &coord_ptr, ref coord_n, &data_ptr, ref data_n, &style_ptr, ref style_n, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshViewGetListDataStrings(tag, dim, &coord_ptr, ref coord_n, &data_ptr, ref data_n, &style_ptr, ref style_n, ref Gmsh._staticreff);
                     coord = UnsafeHelp.ToDoubleArray(coord_ptr, coord_n);
                     data = UnsafeHelp.ToString(data_ptr, data_n);
                     style = UnsafeHelp.ToString(style_ptr, style_n);
@@ -229,7 +229,7 @@ namespace GmshNet
             /// </summary>
             public static void AddAlias(int refTag, bool copyOptions = false, int tag = -1)
             {
-                Gmsh_Warp.GmshViewAddAlias(refTag, Convert.ToInt32(copyOptions), tag, ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewAddAlias(refTag, Convert.ToInt32(copyOptions), tag, ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -241,7 +241,7 @@ namespace GmshNet
             /// </summary>
             public static void Combine(string what, string how, bool remove = true, bool copyOptions = true)
             {
-                Gmsh_Warp.GmshViewCombine(what, how, Convert.ToInt32(remove), Convert.ToInt32(copyOptions), ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewCombine(what, how, Convert.ToInt32(remove), Convert.ToInt32(copyOptions), ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
 
@@ -271,7 +271,7 @@ namespace GmshNet
                     if (yElemCoord == default) yElemCoord = new double[0];
                     if (zElemCoord == default) zElemCoord = new double[0];
                     distance = -1;
-                    Gmsh_Warp.GmshViewProbe(tag, x, y, z, &value_ptr, ref value_n, ref distance, step, numComp, Convert.ToInt32(gradient), tolerance, xElemCoord, xElemCoord.LongLength, 
+                    Gmsh_wrap.Gmsh_wrap.GmshViewProbe(tag, x, y, z, &value_ptr, ref value_n, ref distance, step, numComp, Convert.ToInt32(gradient), tolerance, xElemCoord, xElemCoord.LongLength, 
                         yElemCoord, yElemCoord.LongLength, zElemCoord, zElemCoord.LongLength, dim, ref Gmsh._staticreff);
                     value = UnsafeHelp.ToDoubleArray(value_ptr, value_n);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
@@ -284,7 +284,7 @@ namespace GmshNet
             /// </summary>
             public static void Write(int tag, string fileName, bool append = true)
             {
-                Gmsh_Warp.GmshViewWrite(tag, fileName, Convert.ToInt32(append), ref Gmsh._staticreff);
+                Gmsh_wrap.Gmsh_wrap.GmshViewWrite(tag, fileName, Convert.ToInt32(append), ref Gmsh._staticreff);
                 Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
             }
         }

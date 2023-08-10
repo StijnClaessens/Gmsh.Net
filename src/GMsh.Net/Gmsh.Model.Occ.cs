@@ -1,4 +1,4 @@
-﻿using Gmsh_warp;
+﻿using Gmsh_wrap;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +23,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddPoint(double x, double y, double z, double meshSize = 0, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddPoint(x, y, z, meshSize, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddPoint(x, y, z, meshSize, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -35,7 +35,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddLine(int startTag, int endTag, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddLine(startTag, endTag, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddLine(startTag, endTag, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -48,7 +48,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCircleArc(int startTag, int centerTag, int endTag, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddCircleArc(startTag, centerTag, endTag, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddCircleArc(startTag, centerTag, endTag, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -61,7 +61,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCircle(int x, int y, int z, int r, int tag = -1, double angle1 = 0, double angle2 = 2 * Math.PI)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddCircle(x, y, z, r, tag, angle1, angle2, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddCircle(x, y, z, r, tag, angle1, angle2, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -75,7 +75,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddEllipseArc(int startTag, int centerTag, int majorTag, int endTag, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddEllipseArc(startTag, centerTag, majorTag, endTag, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddEllipseArc(startTag, centerTag, majorTag, endTag, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -92,7 +92,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddEllipse(int x, int y, int z, int r1, int r2, int tag = -1, double angle1 = 0, double angle2 = 2 * Math.PI)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddEllipse(x, y, z, r1, r2, tag, angle1, angle2, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddEllipse(x, y, z, r1, r2, tag, angle1, angle2, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -105,7 +105,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSpline(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddSpline(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -123,7 +123,7 @@ namespace GmshNet
                     if (weights == default) weights = new double[0];
                     if (knots == default) knots = new double[0];
                     if (multiplicities == default) multiplicities = new int[0];
-                    var index = Gmsh_Warp.GmshModelOccAddBSpline(pointTags, pointTags.LongLength, tag, degree,
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBSpline(pointTags, pointTags.LongLength, tag, degree,
                         weights, weights.LongLength,
                         knots, knots.LongLength,
                         multiplicities, multiplicities.LongLength,
@@ -139,7 +139,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBezier(int[] pointTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddBezier(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBezier(pointTags, pointTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -153,7 +153,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddWire(int[] curveTags, int tag = -1, bool checkClosed = false)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddWire(curveTags, curveTags.LongLength, tag, Convert.ToInt32(checkClosed), ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddWire(curveTags, curveTags.LongLength, tag, Convert.ToInt32(checkClosed), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -168,7 +168,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCurveLoop(int[] curveTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddCurveLoop(curveTags, curveTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddCurveLoop(curveTags, curveTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -181,7 +181,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddRectangle(double x, double y, double z, double dx, double dy, int tag = -1, double roundedRadius = 0)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddRectangle(x, y, z, dx, dy, tag, roundedRadius, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddRectangle(x, y, z, dx, dy, tag, roundedRadius, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -193,7 +193,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddDisk(double xc, double yc, double zc, double rx, double ry, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddDisk(xc, yc, zc, rx, ry, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddDisk(xc, yc, zc, rx, ry, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -207,7 +207,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddPlaneSurface(int[] wireTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddPlaneSurface(wireTags, wireTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddPlaneSurface(wireTags, wireTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -222,7 +222,7 @@ namespace GmshNet
                     bool anisotropic = false, double tol2d = 0.00001, double tol3d = 0.0001, double tolAng = 0.01, double tolCurv = 0.1, int maxDegree = 8, int maxSegments = 9)
                 {
                     if (pointTags == default) pointTags = new int[0];
-                    var index = Gmsh_Warp.GmshModelOccAddSurfaceFilling(wireTag, tag, pointTags, pointTags.LongLength, degree, numPointsOnCurves, numIter,
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddSurfaceFilling(wireTag, tag, pointTags, pointTags.LongLength, degree, numPointsOnCurves, numIter,
                         Convert.ToInt16(anisotropic), tol2d, tol3d, tolAng, tolCurv, maxDegree, maxSegments, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
@@ -239,7 +239,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBSplineFilling(int wireTag, int tag = -1, string type = "")
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddBSplineFilling(wireTag, tag, type, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBSplineFilling(wireTag, tag, type, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -255,7 +255,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBezierFilling(int wireTag, int tag = -1, string type = "")
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddBezierFilling(wireTag, tag, type, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBezierFilling(wireTag, tag, type, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -282,7 +282,7 @@ namespace GmshNet
                     if (multiplicitiesU == default) multiplicitiesU = new int[0];
                     if (multiplicitiesV == default) multiplicitiesV = new int[0];
                     if (wireTags == default) wireTags = new int[0];
-                    var index = Gmsh_Warp.GmshModelOccAddBSplineSurface(
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBSplineSurface(
                         pointTags, pointTags.LongLength,
                         numPointsU, tag, degreeU, degreeV,
                         weights, weights.LongLength,
@@ -307,7 +307,7 @@ namespace GmshNet
                 {
                     if (wireTags == default) wireTags = new int[0];
 
-                    var index = Gmsh_Warp.GmshModelOccAddBezierSurface(pointTags, pointTags.LongLength, numPointsU, tag, wireTags, 
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBezierSurface(pointTags, pointTags.LongLength, numPointsU, tag, wireTags, 
                                                                       wireTags.LongLength, Convert.ToInt32(wire3D), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
@@ -323,7 +323,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddTrimmedSurface(int surfacetag, int[] wireTags, bool wire3D = false, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddTrimmedSurface(surfacetag, wireTags, wireTags.LongLength, Convert.ToInt32(wire3D), tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddTrimmedSurface(surfacetag, wireTags, wireTags.LongLength, Convert.ToInt32(wire3D), tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -337,7 +337,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSurfaceLoop(int[] surfaceTags, int tag = -1, bool sewing = false)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddSurfaceLoop(surfaceTags, surfaceTags.LongLength, tag, Convert.ToInt32(sewing), ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddSurfaceLoop(surfaceTags, surfaceTags.LongLength, tag, Convert.ToInt32(sewing), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -350,7 +350,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddVolume(int[] shellTags, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddVolume(shellTags, shellTags.LongLength, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddVolume(shellTags, shellTags.LongLength, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -364,7 +364,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddSphere(double xc, double yc, double zc, double radius, int tag, double angle1 = -Math.PI / 2, double angle2 = Math.PI / 2, double angle3 = Math.PI * 2)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddSphere(xc, yc, zc, radius, tag, angle1, angle2, angle3, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddSphere(xc, yc, zc, radius, tag, angle1, angle2, angle3, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -377,7 +377,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddBox(double x, double y, double z, double dx, double dy, double dz, int tag = -1)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddBox(x, y, z, dx, dy, dz, tag, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddBox(x, y, z, dx, dy, dz, tag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -390,7 +390,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCylinder(double x, double y, double z, double dx, double dy, double dz, double r, int tag = -1, double angle = 2 * Math.PI)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddCylinder(x, y, z, dx, dy, dz, r, tag, angle, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddCylinder(x, y, z, dx, dy, dz, r, tag, angle, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -405,7 +405,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddCone(double x, double y, double z, double dx, double dy, double dz, double r1, double r2, int tag = -1, double angle = 2 * Math.PI)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddCone(x, y, z, dx, dy, dz, r1, r2, tag, angle, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddCone(x, y, z, dx, dy, dz, r1, r2, tag, angle, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -419,7 +419,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddWedge(double x, double y, double z, double dx, double dy, double dz, int tag = -1, double ltx = 0)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddWedge(x, y, z, dx, dy, dz, tag, ltx, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddWedge(x, y, z, dx, dy, dz, tag, ltx, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -432,7 +432,7 @@ namespace GmshNet
                 /// </summary>
                 public static int AddTorus(double x, double y, double z, double r1, double r2, int tag = -1, double angle = 2 * Math.PI)
                 {
-                    var index = Gmsh_Warp.GmshModelOccAddTorus(x, y, z, r1, r2, tag, angle, ref Gmsh._staticreff);
+                    var index = Gmsh_wrap.Gmsh_wrap.GmshModelOccAddTorus(x, y, z, r1, r2, tag, angle, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return index;
                 }
@@ -452,7 +452,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccAddThruSections(wireTags, wireTags.LongLength, &outDimTags_ptr, ref outDimTags_n, tag,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccAddThruSections(wireTags, wireTags.LongLength, &outDimTags_ptr, ref outDimTags_n, tag,
                            Convert.ToInt32(makeSolid), Convert.ToInt32(makeRuled), maxDegree, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n).ToIntPair().ToArray();
@@ -472,7 +472,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccAddThickSolid(volumeTag, excludeSurfaceTags, excludeSurfaceTags.LongLength, offset, &outDimTags_ptr, ref outDimTags_n, tag, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccAddThickSolid(volumeTag, excludeSurfaceTags, excludeSurfaceTags.LongLength, offset, &outDimTags_ptr, ref outDimTags_n, tag, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n).ToIntPair();
                     }
@@ -495,7 +495,7 @@ namespace GmshNet
 
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccExtrude(dimTags_array, dimTags_array.LongLength, dx, dy, dz,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccExtrude(dimTags_array, dimTags_array.LongLength, dx, dy, dz,
                             &outDimTags_ptr, ref outDimTags_n, numElements, numElements.LongLength, heights, heights.LongLength,
                             Convert.ToInt32(recombine), ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
@@ -526,7 +526,7 @@ namespace GmshNet
 
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccRevolve(dimTags_array, dimTags_array.LongLength, x, y, z, ax, ay, az, angle,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccRevolve(dimTags_array, dimTags_array.LongLength, x, y, z, ax, ay, az, angle,
                             &outDimTags_ptr, ref outDimTags_n, numElements, numElements.LongLength, heights, heights.LongLength,
                             Convert.ToInt32(recombine), ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
@@ -552,7 +552,7 @@ namespace GmshNet
 
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccAddPipe(dimTags_array, dimTags_array.LongLength, wireTag,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccAddPipe(dimTags_array, dimTags_array.LongLength, wireTag,
                             &outDimTags_ptr, ref outDimTags_n, trihedron, ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
@@ -576,7 +576,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccFillet(volumeTags, volumeTags.LongLength, curveTags, curveTags.LongLength, radii, radii.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccFillet(volumeTags, volumeTags.LongLength, curveTags, curveTags.LongLength, radii, radii.LongLength,
                             &outDimTags_ptr, ref outDimTags_n, Convert.ToInt32(removeVolume), ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
@@ -602,7 +602,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccChamfer(volumeTags, volumeTags.LongLength, curveTags, curveTags.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccChamfer(volumeTags, volumeTags.LongLength, curveTags, curveTags.LongLength,
                             surfaceTags, surfaceTags.LongLength, distances, distances.LongLength,
                             &outDimTags_ptr, ref outDimTags_n, Convert.ToInt32(removeVolume), ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
@@ -621,7 +621,7 @@ namespace GmshNet
 					unsafe
 					{
                         var dimTags_array = dimTags.ToIntArray();
-                        Gmsh_Warp.GmshModelOccConvertToNURBS(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccConvertToNURBS(dimTags_array, dimTags_array.LongLength, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     }
 				}
@@ -645,7 +645,7 @@ namespace GmshNet
                         int** outDimTagsMap_ptr;
                         long* outDimTagsMap_n_ptr;
                         long outDimTagsMap_nn = 0;
-                        Gmsh_Warp.GmshModelOccFuse(objectDimTags_array, objectDimTags_array.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccFuse(objectDimTags_array, objectDimTags_array.LongLength,
                             toolDimTags_array, toolDimTags_array.LongLength,
                             &outDimTags_ptr, ref outDimTags_n,
                             &outDimTagsMap_ptr, &outDimTagsMap_n_ptr, ref outDimTagsMap_nn,
@@ -679,7 +679,7 @@ namespace GmshNet
                         int** outDimTagsMap_ptr;
                         long* outDimTagsMap_n_ptr;
                         long outDimTagsMap_nn = 0;
-                        Gmsh_Warp.GmshModelOccIntersect(objectDimTags_array, objectDimTags_array.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccIntersect(objectDimTags_array, objectDimTags_array.LongLength,
                             toolDimTags_array, toolDimTags_array.LongLength,
                             &outDimTags_ptr, ref outDimTags_n,
                             &outDimTagsMap_ptr, &outDimTagsMap_n_ptr, ref outDimTagsMap_nn,
@@ -713,7 +713,7 @@ namespace GmshNet
                         int** outDimTagsMap_ptr;
                         long* outDimTagsMap_n_ptr;
                         long outDimTagsMap_nn = 0;
-                        Gmsh_Warp.GmshModelOccCut(objectDimTags_array, objectDimTags_array.LongLength, toolDimTags_array, toolDimTags_array.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccCut(objectDimTags_array, objectDimTags_array.LongLength, toolDimTags_array, toolDimTags_array.LongLength,
                             &outDimTags_ptr, ref outDimTags_n, &outDimTagsMap_ptr, &outDimTagsMap_n_ptr, ref outDimTagsMap_nn, tag,
                             Convert.ToInt32(removeObject), Convert.ToInt32(removeTool),
                             ref Gmsh._staticreff);
@@ -749,7 +749,7 @@ namespace GmshNet
                         int** outDimTagsMap_ptr;
                         long* outDimTagsMap_n_ptr;
                         long outDimTagsMap_nn = 0;
-                        Gmsh_Warp.GmshModelOccFragment(objectDimTags_array, objectDimTags_array.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccFragment(objectDimTags_array, objectDimTags_array.LongLength,
                             toolDimTags_array, toolDimTags_array.LongLength,
                             &outDimTags_ptr, ref outDimTags_n,
                             &outDimTagsMap_ptr, &outDimTagsMap_n_ptr, ref outDimTagsMap_nn,
@@ -770,7 +770,7 @@ namespace GmshNet
                 public static void Translate(ValueTuple<int, int>[] dimTags, double dx, double dy, double dz)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccTranslate(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccTranslate(dimTags_array, dimTags_array.LongLength,
                         dx, dy, dz, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -783,7 +783,7 @@ namespace GmshNet
                 public static void Rotate(ValueTuple<int, int>[] dimTags, double x, double y, double z, double ax, double ay, double az, double angle)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccRotate(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccRotate(dimTags_array, dimTags_array.LongLength,
                         x, y, z, ax, ay, az, angle, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -796,7 +796,7 @@ namespace GmshNet
                 public static void Dilate(ValueTuple<int, int>[] dimTags, double x, double y, double z, double a, double b, double c)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccDilate(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccDilate(dimTags_array, dimTags_array.LongLength,
                         x, y, z, a, b, c, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -808,7 +808,7 @@ namespace GmshNet
                 public static void Mirror(ValueTuple<int, int>[] dimTags, double a, double b, double c, double d)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccMirror(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccMirror(dimTags_array, dimTags_array.LongLength,
                          a, b, c, d, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -822,7 +822,7 @@ namespace GmshNet
                 public static void Symmetrize(ValueTuple<int, int>[] dimTags, double a, double b, double c, double d)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccSymmetrize(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccSymmetrize(dimTags_array, dimTags_array.LongLength,
                          a, b, c, d, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -835,7 +835,7 @@ namespace GmshNet
                 public static void AffineTransform(ValueTuple<int, int>[] dimTags, double[] a)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccAffineTransform(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccAffineTransform(dimTags_array, dimTags_array.LongLength,
                          a, a.LongLength, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -852,7 +852,7 @@ namespace GmshNet
 
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccCopy(dimTags_array, dimTags_array.LongLength,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccCopy(dimTags_array, dimTags_array.LongLength,
                             &outDimTags_ptr, ref outDimTags_n, ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
@@ -869,7 +869,7 @@ namespace GmshNet
                 public static void Remove(ValueTuple<int, int>[] dimTags, bool recursive = false)
                 {
                     var dimTags_array = dimTags.ToIntArray();
-                    Gmsh_Warp.GmshModelOccRemove(dimTags_array, dimTags_array.LongLength,
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccRemove(dimTags_array, dimTags_array.LongLength,
                          Convert.ToInt32(recursive), ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
@@ -881,7 +881,7 @@ namespace GmshNet
                 /// </summary>
                 public static void RemoveAllDuplicates()
                 {
-                    Gmsh_Warp.GmshModelOccRemoveAllDuplicates(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccRemoveAllDuplicates(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -900,7 +900,7 @@ namespace GmshNet
                         var dimTags_array = dimTags.ToIntArray();
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccHealShapes(
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccHealShapes(
                             &outDimTags_ptr, ref outDimTags_n,
                             dimTags_array, dimTags_array.LongLength,
                             tolerance, Convert.ToInt32(fixDegenerated), Convert.ToInt32(fixSmallEdges), Convert.ToInt32(fixSmallFaces), Convert.ToInt32(sewFaces),
@@ -927,7 +927,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccImportShapes(filename,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccImportShapes(filename,
                             &outDimTags_ptr, ref outDimTags_n, Convert.ToInt32(highestDimOnly), format, ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
@@ -951,7 +951,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccImportShapesNativePointer(shape,
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccImportShapesNativePointer(shape,
                             &outDimTags_ptr, ref outDimTags_n, Convert.ToInt32(highestDimOnly), ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
@@ -972,7 +972,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccGetEntities(&outDimTags_ptr, ref outDimTags_n, dim, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccGetEntities(&outDimTags_ptr, ref outDimTags_n, dim, ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
 
@@ -993,7 +993,7 @@ namespace GmshNet
                     {
                         int* outDimTags_ptr;
                         long outDimTags_n = 0;
-                        Gmsh_Warp.GmshModelOccGetEntitiesInBoundingBox(xmin, ymin, zmin, xmax, ymax, zmax, &outDimTags_ptr, ref outDimTags_n, dim, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccGetEntitiesInBoundingBox(xmin, ymin, zmin, xmax, ymax, zmax, &outDimTags_ptr, ref outDimTags_n, dim, ref Gmsh._staticreff);
                         var outDimTags_array = UnsafeHelp.ToIntArray(outDimTags_ptr, outDimTags_n);
                         var outDimTags = outDimTags_array.ToIntPair();
 
@@ -1009,7 +1009,7 @@ namespace GmshNet
                 public static void GetBoundingBox(int dim, int tag, out double xmin, out double ymin, out double zmin, out double xmax, out double ymax, out double zmax)
                 {
                     xmin = 0; ymin = 0; zmin = 0; xmax = 0; ymax = 0; zmax = 0;
-                    Gmsh_Warp.GmshModelOccGetBoundingBox(dim, tag, ref xmin, ref ymin, ref zmin, ref xmax, ref ymax, ref zmax, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccGetBoundingBox(dim, tag, ref xmin, ref ymin, ref zmin, ref xmax, ref ymax, ref zmax, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1019,7 +1019,7 @@ namespace GmshNet
                 public static double GetMass(int dim, int tag)
                 {
                     double mass = 0;
-                    Gmsh_Warp.GmshModelOccGetMass(dim, tag, ref mass, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccGetMass(dim, tag, ref mass, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return mass;
                 }
@@ -1031,7 +1031,7 @@ namespace GmshNet
                 public static void GetCenterOfMass(int dim, int tag, out double x, out double y, out double z)
                 {
                     x = 0; y = 0; z = 0;
-                    Gmsh_Warp.GmshModelOccGetCenterOfMass(dim, tag, ref x, ref y, ref z, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccGetCenterOfMass(dim, tag, ref x, ref y, ref z, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1045,7 +1045,7 @@ namespace GmshNet
                     {
                         double* mat_ptr;
                         long mat_n = 0;
-                        Gmsh_Warp.GmshModelOccGetMatrixOfInertia(dim, tag, &mat_ptr, ref mat_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccGetMatrixOfInertia(dim, tag, &mat_ptr, ref mat_n, ref Gmsh._staticreff);
                         var mat = UnsafeHelp.ToDoubleArray(mat_ptr, mat_n);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         return mat;
@@ -1058,7 +1058,7 @@ namespace GmshNet
                 /// </summary>
                 public static int GetMaxTag(int dim)
                 {
-                    var maxTag = Gmsh_Warp.GmshModelOccGetMaxTag(dim, ref Gmsh._staticreff);
+                    var maxTag = Gmsh_wrap.Gmsh_wrap.GmshModelOccGetMaxTag(dim, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                     return maxTag;
                 }
@@ -1069,7 +1069,7 @@ namespace GmshNet
                 /// </summary>
                 public static void SetMaxTag(int dim, int maxTag)
                 {
-                    Gmsh_Warp.GmshModelOccSetMaxTag(dim, maxTag, ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccSetMaxTag(dim, maxTag, ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1082,7 +1082,7 @@ namespace GmshNet
                     {
                         int* tags_ptr;
                         long tags_n = 0;
-                        Gmsh_Warp.GmshModelOccGetCurveLoops(surfaceTag, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccGetCurveLoops(surfaceTag, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         var outDimTags_array = UnsafeHelp.ToIntArray(tags_ptr, tags_n);
                         return outDimTags_array;
@@ -1097,7 +1097,7 @@ namespace GmshNet
                 /// </summary>
                 public static void Synchronize()
                 {
-                    Gmsh_Warp.GmshModelOccSynchronize(ref Gmsh._staticreff);
+                    Gmsh_wrap.Gmsh_wrap.GmshModelOccSynchronize(ref Gmsh._staticreff);
                     Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                 }
 
@@ -1107,7 +1107,7 @@ namespace GmshNet
                     {
                         int* tags_ptr;
                         long tags_n = 0;
-                        Gmsh_Warp.GmshModelOccGetSurfaceLoops(volumeTag, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
+                        Gmsh_wrap.Gmsh_wrap.GmshModelOccGetSurfaceLoops(volumeTag, &tags_ptr, ref tags_n, ref Gmsh._staticreff);
                         Gmsh.CheckException(MethodBase.GetCurrentMethod().MethodHandle);
                         var outDimTags_array = UnsafeHelp.ToIntArray(tags_ptr, tags_n);
                         return outDimTags_array;

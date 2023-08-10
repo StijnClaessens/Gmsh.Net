@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -29,17 +29,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\UnsafeEx\UnsafeEx.csproj" />
-  </ItemGroup>
       
 	<ItemGroup>
-		<None Include="..\..\dll\windows\gmsh-4.9.dll" Pack="true" PackagePath="build\">
+	  <ProjectReference Include="..\UnsafeEx\UnsafeEx.csproj" />
+	</ItemGroup>
+      
+	<ItemGroup>
+	  <Folder Include="Gmsh.sdk\" />
+	</ItemGroup>
+      
+
+	<ItemGroup>
+		<None Include="..\..\Gmsh SDK\lib\gmsh-4.11.dll" Link="Gmsh.sdk\gmsh-4.9.dll" Pack="true" PackagePath="build\">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\..\dll\windows\GMsh.Net.targets" Pack="true" PackagePath="build\">
+		<None Include="..\..\Gmsh SDK\lib\Gmsh.Net.targets" Link="Gmsh.sdk\Gmsh.Net.targets" Pack="true" PackagePath="build\">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-
+	
 </Project>
